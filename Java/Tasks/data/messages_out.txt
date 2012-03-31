@@ -1,0 +1,10 @@
+5
+Hello!
+Nice to meet you!
+How are you?
+Yeah
+I'm fine too
+3
+Well
+See you then
+Bye!
