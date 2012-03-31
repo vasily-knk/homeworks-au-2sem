@@ -3,14 +3,24 @@ package ru.spbau.kononenko.task1;
 import java.io.IOException;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Vasya
- * Date: 21.03.12
- * Time: 22:39
- * To change this template use File | Settings | File Templates.
+ * Message writer which prints messages to the console in the following format:
+ * <p />
+ * <pre> </pre></pre>Message 1
+ * 1.1. line 1
+ * 1.2. line 2
+ * ...</pre>
+ * @author Vasily Kononenko
+ * @version %I%, %G%
  */
-class ConsoleMessageWriter implements MessageWriter {
-    private int count = 1;
+public class ConsoleMessageWriter implements MessageWriter {
+    private int count;
+
+    /**
+     * initializes this writer
+     */
+    public ConsoleMessageWriter() {
+        count = 1;
+    }
 
     @Override
     public void writeMessage(Message message) {

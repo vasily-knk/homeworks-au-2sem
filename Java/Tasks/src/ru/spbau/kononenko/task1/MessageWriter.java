@@ -4,12 +4,21 @@ import java.io.Closeable;
 import java.io.IOException;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Vasya
- * Date: 21.03.12
- * Time: 22:37
- * To change this template use File | Settings | File Templates.
+ * Base interface for message writer
+ * @author Vasily Kononenko
+ * @version %I%, %G%
  */
-interface MessageWriter extends Closeable {
+public interface MessageWriter extends Closeable {
+    /**
+     * releases the associated resource (for instance, closes the output file)
+     * @throws IOException if some IO problem is encountered
+     */
+    void close() throws IOException;
+
+    /**
+     * writes the message
+     * @param message the message to write
+     * @throws IOException if some IO problem is encountered
+     */
     void writeMessage(Message message) throws IOException;
 }

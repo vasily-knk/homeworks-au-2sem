@@ -3,26 +3,35 @@ package ru.spbau.kononenko.task1;
 import java.io.IOException;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Vasya
- * Date: 21.03.12
- * Time: 23:33
- * To change this template use File | Settings | File Templates.
+ * Message writer which joins pairs of messages
+ * and sends them to the real writer specified
+ * @author Vasily Kononenko
+ * @version %I%, %G%
  */
-class CompressingMessageWriter implements MessageWriter {
+public class CompressingMessageWriter implements MessageWriter {
     private static final int MAX_MESSAGES = 2;
 
     private int count = 0;
-    private final Message message = new Message();
+    private final Message joinedMessage = new Message();
     private final MessageWriter writer;
 
+    /**
+     * initializes this writer
+     * @param writer the real writer to send messages to
+     */
     public CompressingMessageWriter(MessageWriter writer) {
         this.writer = writer;
     }
-    
+
+    /**
+     * joins the message to the pair and sends it to the real writer
+     * once it is complete
+     * @param message the message to join
+     * @throws IOException if some IO problem is encountered
+     */
     @Override
-    public void writeMessage(Message new_message) throws IOException {
-        message.append(new_message);
+    public void writeMessage(Message message) throws IOException {
+        joinedMessage.append(message);
         ++count;
 
         if (count == MAX_MESSAGES) {
@@ -31,13 +40,19 @@ class CompressingMessageWriter implements MessageWriter {
         }
     }
 
+    /**
+     * flushes the message (even if not complete)
+     * without closing the real writer
+     * @throws IOException if some IO problem is encountered
+     */
     @Override
     public void close() throws IOException {
-        flush();
+        if (!joinedMessage.isEmpty())
+            flush();
     }
     
     private void flush() throws IOException {
-        writer.writeMessage(message);
-        message.clear();
+        writer.writeMessage(joinedMessage);
+        joinedMessage.clear();
     }
 }

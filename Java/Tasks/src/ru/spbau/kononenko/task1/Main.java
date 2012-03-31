@@ -3,14 +3,17 @@ package ru.spbau.kononenko.task1;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+
 /**
- * Created by IntelliJ IDEA.
- * User: Vasya
- * Date: 21.03.12
- * Time: 22:09
- * To change this template use File | Settings | File Templates.
+ * Main class
+ * @author Vasily Kononenko
+ * @version %I%, %G%
  */
 public class Main {
+    /**
+     * program entry point
+     * @param args command-line args
+     */
     public static void main(String[] args) {
         if (args.length == 0)
         {

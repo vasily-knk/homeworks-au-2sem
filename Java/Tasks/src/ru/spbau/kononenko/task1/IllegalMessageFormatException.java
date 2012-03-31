@@ -1,13 +1,15 @@
 package ru.spbau.kononenko.task1;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Vasya
- * Date: 21.03.12
- * Time: 22:33
- * To change this template use File | Settings | File Templates.
+ * The exception thrown if an input file can't be parsed
+ * @author Vasily Kononenko
+ * @version %I%, %G%
  */
-class IllegalMessageFormatException extends Exception {
+public class IllegalMessageFormatException extends Exception {
+    /**
+     * constructor
+     * @param str exception string
+     */
     public IllegalMessageFormatException(String str) {
         super (str);
     }

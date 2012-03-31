@@ -5,13 +5,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Vasya
- * Date: 21.03.12
- * Time: 23:00
- * To change this template use File | Settings | File Templates.
+ * Message writer which writes messages to a text file in the following format:
+ * <p />
+ * <pre> Number of lines in message 1
+ * Line 1
+ * Line 2
+ * ...
+ * Number of lines in message 2
+ * ...</pre>
+ * @author Vasily Kononenko
+ * @version %I%, %G%
  */
-class FileMessageWriter implements MessageWriter {
+public class FileMessageWriter implements MessageWriter {
     private final BufferedWriter writer;
 
     public FileMessageWriter(String path) throws IOException {
@@ -29,6 +34,10 @@ class FileMessageWriter implements MessageWriter {
         }
     }
 
+    /**
+     * closes the output file
+     * @throws IOException if some IO problem is encountered
+     */
     @Override
     public void close() throws IOException {
         writer.close();
