@@ -1,7 +1,6 @@
 package ru.spbau.kononenko.drunkgame;
 
-public interface Field<T> {
-    public FieldObject getObject(T coord);
-    public void setObject(T coord, FieldObject object);
-    public void print();
+public interface Field/*<Coord>*/ {
+    public FieldObject getObject(Coord coord);
+    public void setObject(Coord coord, FieldObject object);
 }

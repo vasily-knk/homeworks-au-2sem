@@ -2,8 +2,8 @@ package ru.spbau.kononenko.drunkgame;
 
 import java.util.List;
 
-public interface FieldGeometry<T> {
-    public List<T> getAdjacent(T coord);
-    public int getDist(T coord1, T coord2);
-    public boolean isInside(T coord);
+public interface FieldGeometry/*<Coord>*/ {
+    public List<Coord> getAdjacent(Coord coord);
+    public int getDist(Coord coord1, Coord coord2);
+    public boolean isInside(Coord coord);
 }
