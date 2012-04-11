@@ -37,6 +37,5 @@ public class ConsoleMessageWriter implements MessageWriter {
 
     @Override
     public void close() throws IOException {
-
     }
 }

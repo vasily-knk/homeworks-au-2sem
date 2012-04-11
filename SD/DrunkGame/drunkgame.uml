@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ru.spbau.kononenko.drunkgame</OriginalElement>
+  <nodes>
+    <node x="1809.9884920634922" y="198.0">ru.spbau.kononenko.drunkgame.Walking</node>
+    <node x="1067.325" y="10.0">ru.spbau.kononenko.drunkgame.Field</node>
+    <node x="1055.91498015873" y="218.0">ru.spbau.kononenko.drunkgame.FieldImageDecoration</node>
+    <node x="836.6514880952379" y="356.0">ru.spbau.kononenko.drunkgame.RectField</node>
+    <node x="1425.8681547619044" y="594.0">ru.spbau.kononenko.drunkgame.Main</node>
+    <node x="488.5" y="208.0">ru.spbau.kononenko.drunkgame.FieldImage</node>
+    <node x="1481.91498015873" y="218.0">ru.spbau.kononenko.drunkgame.DrunkReportInterface</node>
+    <node x="1257.4566468253968" y="416.0">ru.spbau.kononenko.drunkgame.PoliceDepartment</node>
+    <node x="1593.2134920634921" y="0.0">ru.spbau.kononenko.drunkgame.Coord</node>
+    <node x="39.5" y="208.0">ru.spbau.kononenko.drunkgame.Pillar</node>
+    <node x="263.5" y="208.0">ru.spbau.kononenko.drunkgame.Streetlight</node>
+    <node x="1936.138492063492" y="30.0">ru.spbau.kononenko.drunkgame.FieldOccupiedException</node>
+    <node x="0.0" y="20.0">ru.spbau.kononenko.drunkgame.Property</node>
+    <node x="774.5" y="228.0">ru.spbau.kononenko.drunkgame.FieldOutOfRangeException</node>
+    <node x="1822.7384920634922" y="396.0">ru.spbau.kononenko.drunkgame.Policeman</node>
+    <node x="1539.7134920634921" y="396.0">ru.spbau.kononenko.drunkgame.Drunk</node>
+    <node x="1246.91498015873" y="198.0">ru.spbau.kononenko.drunkgame.FieldGeometry</node>
+    <node x="421.7634920634923" y="10.0">ru.spbau.kononenko.drunkgame.FieldObject</node>
+    <node x="1775.138492063492" y="10.0">ru.spbau.kononenko.drunkgame.DynamicObject</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ru.spbau.kononenko.drunkgame.RectField" target="ru.spbau.kononenko.drunkgame.Coord">
+      <point x="29.555555555555543" y="-94.0" />
+      <point x="999.2070436507934" y="306.0" />
+      <point x="1045.41498015873" y="306.0" />
+      <point x="1045.41498015873" y="168.0" />
+      <point x="1608.313492063492" y="168.0" />
+      <point x="-60.39999999999998" y="44.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.RectField" target="ru.spbau.kononenko.drunkgame.FieldImage">
+      <point x="-88.66666666666663" y="-94.0" />
+      <point x="880.9848214285712" y="326.0" />
+      <point x="621.5" y="326.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Walking" target="ru.spbau.kononenko.drunkgame.Field">
+      <point x="-30.599999999999966" y="-44.0" />
+      <point x="1855.8884920634923" y="138.0" />
+      <point x="1253.1583333333333" y="138.0" />
+      <point x="74.33333333333326" y="34.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Main" target="ru.spbau.kononenko.drunkgame.PoliceDepartment">
+      <point x="-18.0" y="-24.0" />
+      <point x="1479.8681547619044" y="564.0" />
+      <point x="1344.4566468253968" y="564.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Drunk" target="ru.spbau.kononenko.drunkgame.DrunkReportInterface">
+      <point x="-25.5" y="-54.0" />
+      <point x="1616.2134920634921" y="336.0" />
+      <point x="1612.41498015873" y="336.0" />
+      <point x="43.5" y="24.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Main" target="ru.spbau.kononenko.drunkgame.RectField">
+      <point x="-54.0" y="-24.0" />
+      <point x="1443.8681547619044" y="574.0" />
+      <point x="969.6514880952379" y="574.0" />
+      <point x="0.0" y="94.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Walking" target="ru.spbau.kononenko.drunkgame.DynamicObject">
+      <point x="30.600000000000023" y="-44.0" />
+      <point x="1917.0884920634921" y="118.0" />
+      <point x="1845.638492063492" y="118.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.RectField" target="ru.spbau.kononenko.drunkgame.FieldObject">
+      <point x="-118.22222222222217" y="-94.0" />
+      <point x="851.4292658730158" y="336.0" />
+      <point x="478.0" y="336.0" />
+      <point x="478.0" y="178.0" />
+      <point x="523.7634920634923" y="178.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Drunk" target="ru.spbau.kononenko.drunkgame.FieldGeometry">
+      <point x="-76.5" y="-54.0" />
+      <point x="1565.2134920634921" y="326.0" />
+      <point x="1426.0816468253968" y="326.0" />
+      <point x="71.66666666666669" y="44.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.RectField" target="ru.spbau.kononenko.drunkgame.FieldOutOfRangeException">
+      <point x="-59.111111111111086" y="-94.0" />
+      <point x="910.5403769841269" y="316.0" />
+      <point x="866.0" y="316.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Walking" target="ru.spbau.kononenko.drunkgame.FieldObject">
+      <point x="-61.19999999999999" y="-44.0" />
+      <point x="1825.2884920634922" y="148.0" />
+      <point x="605.3634920634922" y="148.0" />
+      <point x="81.59999999999991" y="34.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Main" target="ru.spbau.kononenko.drunkgame.Drunk">
+      <point x="18.0" y="-24.0" />
+      <point x="1515.8681547619044" y="564.0" />
+      <point x="1641.7134920634921" y="564.0" />
+      <point x="0.0" y="54.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Walking" target="ru.spbau.kononenko.drunkgame.FieldOccupiedException">
+      <point x="61.2" y="-44.0" />
+      <point x="1947.6884920634923" y="178.0" />
+      <point x="2019.138492063492" y="178.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Main" target="ru.spbau.kononenko.drunkgame.Coord">
+      <point x="54.0" y="-24.0" />
+      <point x="1551.8681547619044" y="574.0" />
+      <point x="2037.2384920634922" y="574.0" />
+      <point x="2037.2384920634922" y="108.0" />
+      <point x="1729.1134920634922" y="108.0" />
+      <point x="60.39999999999998" y="44.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.PoliceDepartment" target="ru.spbau.kononenko.drunkgame.FieldImageDecoration">
+      <point x="-69.60000000000002" y="-34.0" />
+      <point x="1274.8566468253966" y="326.0" />
+      <point x="1188.41498015873" y="326.0" />
+      <point x="53.0" y="24.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Drunk" target="ru.spbau.kononenko.drunkgame.Coord">
+      <point x="25.5" y="-54.0" />
+      <point x="1667.2134920634921" y="336.0" />
+      <point x="1668.7134920634921" y="336.0" />
+      <point x="0.0" y="44.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.RectField" target="ru.spbau.kononenko.drunkgame.FieldImageDecoration">
+      <point x="59.111111111111086" y="-94.0" />
+      <point x="1028.762599206349" y="316.0" />
+      <point x="1082.41498015873" y="316.0" />
+      <point x="-53.0" y="24.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Pillar" target="ru.spbau.kononenko.drunkgame.FieldObject">
+      <point x="51.0" y="-34.0" />
+      <point x="192.5" y="158.0" />
+      <point x="442.1634920634924" y="158.0" />
+      <point x="-81.59999999999991" y="34.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.PoliceDepartment" target="ru.spbau.kononenko.drunkgame.Coord">
+      <point x="0.0" y="-34.0" />
+      <point x="1344.4566468253968" y="306.0" />
+      <point x="1236.41498015873" y="306.0" />
+      <point x="1236.41498015873" y="178.0" />
+      <point x="1638.513492063492" y="178.0" />
+      <point x="-30.19999999999999" y="44.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Streetlight" target="ru.spbau.kononenko.drunkgame.FieldObject">
+      <point x="0.0" y="-34.0" />
+      <point x="365.5" y="168.0" />
+      <point x="482.96349206349237" y="168.0" />
+      <point x="-40.799999999999955" y="34.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Pillar" target="ru.spbau.kononenko.drunkgame.Property">
+      <point x="-51.0" y="-34.0" />
+      <point x="0.0" y="24.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.RectField" target="ru.spbau.kononenko.drunkgame.FieldGeometry">
+      <point x="118.22222222222217" y="-94.0" />
+      <point x="1087.87371031746" y="336.0" />
+      <point x="1282.7483134920635" y="336.0" />
+      <point x="-71.66666666666663" y="44.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.PoliceDepartment" target="ru.spbau.kononenko.drunkgame.FieldGeometry">
+      <point x="34.799999999999955" y="-34.0" />
+      <point x="1379.2566468253967" y="336.0" />
+      <point x="1354.41498015873" y="336.0" />
+      <point x="0.0" y="44.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.PoliceDepartment" target="ru.spbau.kononenko.drunkgame.DrunkReportInterface">
+      <point x="69.60000000000002" y="-34.0" />
+      <point x="1414.056646825397" y="336.0" />
+      <point x="1525.41498015873" y="336.0" />
+      <point x="-43.5" y="24.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Drunk" target="ru.spbau.kononenko.drunkgame.Walking">
+      <point x="76.5" y="-54.0" />
+      <point x="1718.2134920634921" y="336.0" />
+      <point x="1848.2384920634922" y="336.0" />
+      <point x="-38.25" y="44.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Walking" target="ru.spbau.kononenko.drunkgame.Coord">
+      <point x="0.0" y="-44.0" />
+      <point x="1886.4884920634922" y="128.0" />
+      <point x="1698.9134920634922" y="128.0" />
+      <point x="30.19999999999999" y="44.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.PoliceDepartment" target="ru.spbau.kononenko.drunkgame.Field">
+      <point x="-34.799999999999955" y="-34.0" />
+      <point x="1309.6566468253968" y="316.0" />
+      <point x="1225.41498015873" y="316.0" />
+      <point x="1225.41498015873" y="158.0" />
+      <point x="1178.825" y="158.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.Policeman" target="ru.spbau.kononenko.drunkgame.Walking">
+      <point x="0.0" y="-54.0" />
+      <point x="38.25" y="44.0" />
+    </edge>
+    <edge source="ru.spbau.kononenko.drunkgame.RectField" target="ru.spbau.kononenko.drunkgame.Field">
+      <point x="0.0" y="-94.0" />
+      <point x="969.6514880952379" y="336.0" />
+      <point x="979.0" y="336.0" />
+      <point x="979.0" y="158.0" />
+      <point x="1104.4916666666666" y="158.0" />
+      <point x="-74.33333333333337" y="34.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="1117.5" y="498.0" />
+  <SelectedNodes>
+    <node>ru.spbau.kononenko.drunkgame.FieldObject</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

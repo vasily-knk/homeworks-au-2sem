@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Drunk extends Walking implements DynamicObject {
+public class Drunk extends Walking {
     private final List<Coord> streetlightLocations;
     private final DrunkReportInterface reportInterface;
     private final FieldGeometry geometry;
