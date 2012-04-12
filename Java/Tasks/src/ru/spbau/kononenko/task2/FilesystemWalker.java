@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * FilesystemWalker provides methods to walk through subdirectories of the specified path.
+ * This class provides methods to walk through subdirectories of the specified path.
  * @author Vasily Kononenko
  * @version %I%, %G%
  */
@@ -17,7 +17,7 @@ public class FilesystemWalker {
      * @param path The path to walk through
      */
     public static void walkDir(String path) {
-        walkRecursive(new File(path), new ArrayList<Integer>(), null);
+        walkDir(path, null);
     }
 
     /**
@@ -27,17 +27,17 @@ public class FilesystemWalker {
      * @param filter The filter to apply
      */
     public static void walkDir(String path, PatternFilter filter) {
-        walkRecursive(new File(path), new ArrayList<Integer>(), filter);
+        File root = new File(path);
+        root = root.getAbsoluteFile();
+        walkRecursive(root, new ArrayList<Offset>(), true, filter);
     }
 
-    private static void walkRecursive(File file, List<Integer> offsets, PatternFilter filter) {
-        for (int offset : offsets) {
-            for (int i = 0; i < offset; ++i)
-                System.out.print(" ");
-            System.out.print("|");
+    private static void walkRecursive(File file, List<Offset> offsets, boolean isLast, PatternFilter filter) {
+        for (Offset offset : offsets) {
+            System.out.print(offset);
         }
         
-        String title = (offsets.isEmpty() ? "" : "_") + file.getName();
+        String title = (offsets.isEmpty() ? "" : "|_") + file.getName();
         System.out.print(title);
 
         if (!file.isDirectory()) {
@@ -45,6 +45,10 @@ public class FilesystemWalker {
             return;
         }
 
+        // For some reason, if there is no read access to the directory
+        // canRead() still returns TRUE while readFiles() returns NULL.
+        // file.listFiles(filter) could be used instead of safeListChildren(file, filter),
+        // but skipping canRead() check doesn't seem good to me.
         File[] children = safeListChildren(file, filter);
 
         if (children == null) {
@@ -55,10 +59,9 @@ public class FilesystemWalker {
 
         Arrays.sort(children);
 
-        offsets.add(title.length());
-        for (File child : children) {
-            walkRecursive(child, offsets, filter);
-        }
+        offsets.add(new Offset(title.length(), !isLast));
+        for (int i = 0; i < children.length; ++i)
+            walkRecursive(children[i], offsets, (i == children.length - 1), filter);
         offsets.remove(offsets.size() - 1);
     }
     
@@ -68,8 +71,6 @@ public class FilesystemWalker {
         
         File[] children;
         try {
-            // Weird thing: on Windows, if there is no read access to the directory
-            // canRead() still returns true while readFiles() returns null.
             children = (filter == null) ? parent.listFiles() : parent.listFiles(filter);
         } catch (SecurityException e) {
             children = null;
