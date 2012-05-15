@@ -1,6 +1,6 @@
-package ru.spbau.kononenko.drunkgame;
+package ru.spbau.kononenko.drunkgame.Field;
 
-class Property {
+public class Property {
     public static Property createProperty() {
         return new Property();
     }

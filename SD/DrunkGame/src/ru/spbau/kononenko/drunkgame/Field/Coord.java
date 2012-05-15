@@ -1,6 +1,6 @@
-package ru.spbau.kononenko.drunkgame;
+package ru.spbau.kononenko.drunkgame.Field;
 
-final class Coord {
+public class Coord {
     public final int x, y;
 
     public Coord(int x, int y) {

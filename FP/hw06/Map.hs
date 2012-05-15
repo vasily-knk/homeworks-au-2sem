@@ -8,8 +8,9 @@ module Map
     ) where
 
 import Prelude hiding (lookup)
+import Tree
 
-data Map k v = ...
+data Map k v = MapTree (k, v) (k, v) | EmptyMap
 
 lookup :: Ord k => k -> Map k v -> Maybe v
 lookup = undefined
@@ -23,7 +24,13 @@ delete :: Ord k => k -> Map k v -> Maybe (Map k v)
 delete = undefined
 
 fromList :: Ord k => [(k, v)] -> Map k v
-fromList = undefinde
+fromList [] = EmptyMap 
+fromList lst =  helper EmptyMap lst where
+	helper m lst 
+		| lst == [] = m
+		| otherwise = helper (insertpair (head lst) m) where
+			insertpair (k, v) m = fst $ insert k v m
+	--inserter (k, v) = insert k 
 
 -- Обход в инфиксном порядке
 toList :: Map k v -> [(k, v)]

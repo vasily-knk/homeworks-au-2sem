@@ -1,6 +1,9 @@
 package ru.spbau.kononenko.drunkgame;
 
-class Pillar implements FieldObject {
+import ru.spbau.kononenko.drunkgame.Field.FieldObject;
+import ru.spbau.kononenko.drunkgame.Field.Property;
+
+public class Pillar implements FieldObject {
     public final static Property freezeProperty = Property.createProperty();
 
 	@Override

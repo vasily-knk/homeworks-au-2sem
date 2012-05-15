@@ -1,4 +1,8 @@
-package ru.spbau.kononenko.drunkgame;
+package ru.spbau.kononenko.drunkgame.Walking;
+
+import ru.spbau.kononenko.drunkgame.Field.Coord;
+import ru.spbau.kononenko.drunkgame.Field.Field;
+import ru.spbau.kononenko.drunkgame.Field.Property;
 
 public class Policeman extends Walking {
     Policeman(Field field, Coord coord) {

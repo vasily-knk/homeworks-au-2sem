@@ -1,3 +1,10 @@
+module Tree
+    ( Tree
+    , height
+    , avg
+    , width
+    ) where
+
 data Tree a b = Branch (Tree a b) a (Tree a b) | Leaf b
 
 -- Возвращает высоту дерева
