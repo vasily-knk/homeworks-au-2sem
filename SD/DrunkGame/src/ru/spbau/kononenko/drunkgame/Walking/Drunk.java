@@ -11,7 +11,7 @@ import ru.spbau.kononenko.drunkgame.Static.Pillar;
 import java.util.List;
 import java.util.Random;
 
-public class Drunk extends Walking implements Arrestable {
+public class Drunk extends Actor implements Arrestable {
     private static final int BOTTLE_DROP_PROBABILITY = 30;
     
     private Random random = new Random();
@@ -93,12 +93,7 @@ public class Drunk extends Walking implements Arrestable {
 
     @Override
     public void arrest(Policeman policeman) {
-        isArrested = true;
-        field.removeObject(coord);
+        kill();
     }
 
-    @Override
-    public boolean isDead() {
-        return isArrested;
-    }
 }

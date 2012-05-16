@@ -5,15 +5,21 @@ import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
 import ru.spbau.kononenko.drunkgame.Field.SelfAwareImpl;
 
-public abstract class Walking extends SelfAwareImpl implements DynamicObject {
+public abstract class Actor extends SelfAwareImpl implements DynamicObject {
+    private boolean dead = false;
 
-    public Walking(Field field, Coord coord) {
+    public Actor(Field field, Coord coord) {
         super (field, coord);
     }
 
     @Override
     public boolean isDead() {
-        return false;
+        return dead;
+    }
+
+    public void kill() {
+        field.removeObject(coord);
+        dead = true;
     }
 	
 }

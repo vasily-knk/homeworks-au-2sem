@@ -1,5 +1,6 @@
 package ru.spbau.kononenko.drunkgame.Portals;
 
+import ru.spbau.kononenko.drunkgame.PoliceReportInterface;
 import ru.spbau.kononenko.drunkgame.Searcher;
 import ru.spbau.kononenko.drunkgame.Dynamic.DynamicControl;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
@@ -34,7 +35,12 @@ public class PoliceDept extends Portal {
 
     private void tryToSendPoliceman(Coord res) {
         if (canSpawn()) {
-            spawn(new Policeman(field, coord, res));
+            spawn(new Policeman(field, coord, res, new PoliceReportInterface() {
+                @Override
+                public void report() {
+                    policemanIsOut = false;
+                }
+            }));
         }
     }
 
@@ -42,4 +48,5 @@ public class PoliceDept extends Portal {
     public boolean isActive() {
         return !policemanIsOut;
     }
+
 }
