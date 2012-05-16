@@ -1,9 +1,13 @@
 package ru.spbau.kononenko.drunkgame;
 
+import ru.spbau.kononenko.drunkgame.Dynamic.DynamicControl;
+import ru.spbau.kononenko.drunkgame.Dynamic.DynamicObject;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
 import ru.spbau.kononenko.drunkgame.Field.RectField;
 import ru.spbau.kononenko.drunkgame.Portals.Bar;
+import ru.spbau.kononenko.drunkgame.Static.Pillar;
+import ru.spbau.kononenko.drunkgame.Static.Streetlight;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,11 +1,11 @@
 package ru.spbau.kononenko.drunkgame.Walking;
 
-import ru.spbau.kononenko.drunkgame.Bottle;
+import ru.spbau.kononenko.drunkgame.Static.Bottle;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
 import ru.spbau.kononenko.drunkgame.Field.FieldObject;
 import ru.spbau.kononenko.drunkgame.Field.Property;
-import ru.spbau.kononenko.drunkgame.Pillar;
+import ru.spbau.kononenko.drunkgame.Static.Pillar;
 
 import java.util.List;
 import java.util.Random;
@@ -17,6 +17,8 @@ public class Drunk extends Walking {
     private boolean isFrozen = false;
     private boolean isSleeping = false;
     private boolean hasBottle = true;
+    
+    public static Property sleepingDrunkProperty = Property.createProperty();
 
     public Drunk(Field field, Coord coord) {
         super(field, coord);
@@ -26,6 +28,8 @@ public class Drunk extends Walking {
     public boolean getProperty(Property property) {
         if (property == Pillar.freezeProperty)
             return isFrozen;
+        else if (property == sleepingDrunkProperty)
+            return isSleeping;
 
         return false;
     }

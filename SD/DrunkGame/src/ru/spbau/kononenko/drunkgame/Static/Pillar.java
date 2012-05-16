@@ -1,4 +1,4 @@
-package ru.spbau.kononenko.drunkgame;
+package ru.spbau.kononenko.drunkgame.Static;
 
 import ru.spbau.kononenko.drunkgame.Field.FieldObject;
 import ru.spbau.kononenko.drunkgame.Field.Property;

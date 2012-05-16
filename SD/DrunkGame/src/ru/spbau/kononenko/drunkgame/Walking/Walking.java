@@ -1,17 +1,15 @@
 package ru.spbau.kononenko.drunkgame.Walking;
 
+import ru.spbau.kononenko.drunkgame.Dynamic.DynamicObject;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
-import ru.spbau.kononenko.drunkgame.DynamicObject;
 import ru.spbau.kononenko.drunkgame.Field.Field;
 import ru.spbau.kononenko.drunkgame.Field.FieldObject;
+import ru.spbau.kononenko.drunkgame.Field.SelfAwareFieldObject;
 
-public abstract class Walking implements FieldObject, DynamicObject {
-    protected final Field field;
-	private Coord coord;
+public abstract class Walking extends SelfAwareFieldObject implements DynamicObject {
 
     public Walking(Field field, Coord coord) {
-        this.field = field;
-        this.coord = coord;
+        super (field, coord);
     }
 	
 	protected Coord getCoord() {

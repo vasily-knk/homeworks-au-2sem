@@ -1,4 +1,4 @@
-package ru.spbau.kononenko.drunkgame;
+package ru.spbau.kononenko.drunkgame.Dynamic;
 
 public interface DynamicObject {
 	public void update();

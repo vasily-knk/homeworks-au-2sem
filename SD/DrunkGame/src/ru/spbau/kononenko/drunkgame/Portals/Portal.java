@@ -1,8 +1,8 @@
 package ru.spbau.kononenko.drunkgame.Portals;
 
+import ru.spbau.kononenko.drunkgame.Dynamic.DynamicControl;
+import ru.spbau.kononenko.drunkgame.Dynamic.DynamicObject;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
-import ru.spbau.kononenko.drunkgame.DynamicControl;
-import ru.spbau.kononenko.drunkgame.DynamicObject;
 import ru.spbau.kononenko.drunkgame.Field.Field;
 import ru.spbau.kononenko.drunkgame.Walking.Walking;
 
