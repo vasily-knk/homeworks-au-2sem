@@ -1,11 +1,11 @@
 package ru.spbau.kononenko.drunkgame.Static;
 
 import ru.spbau.kononenko.drunkgame.BFS;
-import ru.spbau.kononenko.drunkgame.DrunkSearcher;
+import ru.spbau.kononenko.drunkgame.Searcher;
 import ru.spbau.kononenko.drunkgame.Field.*;
 import ru.spbau.kononenko.drunkgame.Walking.Drunk;
 
-public class Streetlight extends SelfAwareFieldObject implements DrunkSearcher {
+public class Streetlight extends SelfAwareImpl implements Searcher {
     private final int radius;
 
     public Streetlight(Field field, Coord coord, int radius) {
@@ -13,7 +13,7 @@ public class Streetlight extends SelfAwareFieldObject implements DrunkSearcher {
         this.radius = radius;
     }
     
-    public Coord searchForDrunk() {
+    public Coord search() {
         final Coord[] res = new Coord[1];
         res[0] = null;
 

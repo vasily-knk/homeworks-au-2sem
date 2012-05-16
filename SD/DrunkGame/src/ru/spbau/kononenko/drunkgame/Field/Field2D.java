@@ -1,6 +1,6 @@
 package ru.spbau.kononenko.drunkgame.Field;
 
-public abstract class Field2D implements Field {
+public abstract class Field2D extends Field {
     protected final int width, height;
     private final FieldObject[][] data;
 

@@ -1,5 +1,6 @@
 package ru.spbau.kononenko.drunkgame.Walking;
 
+import ru.spbau.kononenko.drunkgame.Arrestable;
 import ru.spbau.kononenko.drunkgame.Static.Bottle;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
@@ -10,14 +11,15 @@ import ru.spbau.kononenko.drunkgame.Static.Pillar;
 import java.util.List;
 import java.util.Random;
 
-public class Drunk extends Walking {
+public class Drunk extends Walking implements Arrestable {
     private static final int BOTTLE_DROP_PROBABILITY = 30;
     
     private Random random = new Random();
     private boolean isFrozen = false;
     private boolean isSleeping = false;
     private boolean hasBottle = true;
-    
+    private boolean isArrested = false;
+
     public static Property sleepingDrunkProperty = Property.createProperty();
 
     public Drunk(Field field, Coord coord) {
@@ -87,5 +89,16 @@ public class Drunk extends Walking {
         field.removeObject(dir);
         super.moveTo(dir);
         isSleeping = true;
+    }
+
+    @Override
+    public void arrest(Policeman policeman) {
+        isArrested = true;
+        field.removeObject(coord);
+    }
+
+    @Override
+    public boolean isDead() {
+        return isArrested;
     }
 }

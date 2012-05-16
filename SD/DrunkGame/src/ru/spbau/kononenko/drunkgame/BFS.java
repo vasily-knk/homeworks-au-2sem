@@ -11,10 +11,10 @@ public abstract class BFS {
     public static class Record {
         public final Coord coord;
         public final int depth;
-        
+
         Record (Coord coord, int depth) {
             this.coord = coord;
-            this.depth = depth;        
+            this.depth = depth;
         }
     }
 
@@ -23,7 +23,7 @@ public abstract class BFS {
     }
     
     private Field field;
-    private HashSet visited = new HashSet();
+    private HashSet<Coord> visited = new HashSet<Coord>();
     private Queue<Record> queue = new LinkedList<Record>();
 
     public BFS(Field field, Coord start) {

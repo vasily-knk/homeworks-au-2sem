@@ -1,32 +1,30 @@
 package ru.spbau.kononenko.drunkgame.Portals;
 
-import ru.spbau.kononenko.drunkgame.BFS;
-import ru.spbau.kononenko.drunkgame.DrunkSearcher;
+import ru.spbau.kononenko.drunkgame.Searcher;
 import ru.spbau.kononenko.drunkgame.Dynamic.DynamicControl;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
-import ru.spbau.kononenko.drunkgame.Static.Streetlight;
 import ru.spbau.kononenko.drunkgame.Walking.Policeman;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class PoliceDept extends Portal {
-    List<DrunkSearcher> searchers = new LinkedList<DrunkSearcher>();
+    List<Searcher> searchers = new LinkedList<Searcher>();
     boolean policemanIsOut = false;
 
     public PoliceDept(Field field, Coord coord, DynamicControl dynamicControl) {
         super(field, coord, dynamicControl);
     }
 
-    public void addSearcher(DrunkSearcher searcher) {
+    public void addSearcher(Searcher searcher) {
         searchers.add(searcher);
     }
 
     @Override
     public void update() {
-        for (DrunkSearcher searcher : searchers) {
-            Coord res = searcher.searchForDrunk();
+        for (Searcher searcher : searchers) {
+            Coord res = searcher.search();
             if (res != null) {
                 tryToSendPoliceman(res);
                 break;
@@ -36,7 +34,7 @@ public class PoliceDept extends Portal {
 
     private void tryToSendPoliceman(Coord res) {
         if (canSpawn()) {
-            spawn(new Policeman(field, coord));
+            spawn(new Policeman(field, coord, res));
         }
     }
 
@@ -44,5 +42,4 @@ public class PoliceDept extends Portal {
     public boolean isActive() {
         return !policemanIsOut;
     }
-
 }

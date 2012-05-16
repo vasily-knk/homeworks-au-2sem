@@ -10,12 +10,15 @@ import ru.spbau.kononenko.drunkgame.Portals.PoliceDept;
 import ru.spbau.kononenko.drunkgame.Static.Pillar;
 import ru.spbau.kononenko.drunkgame.Static.Streetlight;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Game implements DynamicControl {
     private final List<DynamicObject> objectsList = new LinkedList<DynamicObject>();
-    private final List<DynamicObject> newObjectsList = new LinkedList<DynamicObject>();
+    private final List<DynamicObject> objectsToAdd = new LinkedList<DynamicObject>();
+
     private final Field field;
     private int turn = 0;
 
@@ -33,17 +36,17 @@ public class Game implements DynamicControl {
 
     @Override
     public void add(DynamicObject object) {
-        newObjectsList.add(object);
+        objectsToAdd.add(object);
     }
 
     public void update() {
         for (DynamicObject object : objectsList) {
-            if (object.isActive())
+            if (!object.isDead() && object.isActive())
                 object.update();
         }
 
-        objectsList.addAll(newObjectsList);
-        newObjectsList.clear();
+        objectsList.addAll(objectsToAdd);
+        objectsToAdd.clear();
 
         ++turn;
     }
