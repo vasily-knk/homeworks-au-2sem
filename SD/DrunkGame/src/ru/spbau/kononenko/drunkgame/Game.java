@@ -6,6 +6,7 @@ import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
 import ru.spbau.kononenko.drunkgame.Field.RectField;
 import ru.spbau.kononenko.drunkgame.Portals.Bar;
+import ru.spbau.kononenko.drunkgame.Portals.PoliceDept;
 import ru.spbau.kononenko.drunkgame.Static.Pillar;
 import ru.spbau.kononenko.drunkgame.Static.Streetlight;
 
@@ -22,7 +23,12 @@ public class Game implements DynamicControl {
         field = new RectField(15, 15);
         objectsList.add(new Bar(field, new Coord(9, 0), this));
         field.setObject(new Coord(7, 7), new Pillar());
-        field.setObject(new Coord(10, 3), new Streetlight());
+        
+        PoliceDept dept = new PoliceDept(field, new Coord(14, 3), this); 
+        objectsList.add(dept);
+
+        Streetlight streetlight = new Streetlight(field, new Coord(10, 3), 3);
+        dept.addSearcher(streetlight);
     }
 
     @Override

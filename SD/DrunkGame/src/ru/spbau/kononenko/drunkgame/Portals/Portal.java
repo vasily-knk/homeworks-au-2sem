@@ -22,7 +22,6 @@ public abstract class Portal implements DynamicObject {
     }
 
     public void spawn (Walking object) {
-        field.setObject(coord, object);
         dynamicControl.add(object);
     }
 }

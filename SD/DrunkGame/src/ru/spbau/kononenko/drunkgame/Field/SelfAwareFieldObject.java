@@ -7,6 +7,7 @@ public abstract class SelfAwareFieldObject implements FieldObject {
     public SelfAwareFieldObject(Field field, Coord coord) {
         this.field = field;
         this.coord = coord;
+        field.setObject(coord, this);
     }
 
 }

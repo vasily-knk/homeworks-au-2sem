@@ -4,31 +4,49 @@ import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Queue;
 
 public abstract class BFS {
+    public static class Record {
+        public final Coord coord;
+        public final int depth;
+        
+        Record (Coord coord, int depth) {
+            this.coord = coord;
+            this.depth = depth;        
+        }
+    }
+
+    public enum CheckState {
+        CONTINUE, CUT, STOP
+    }
+    
     private Field field;
     private HashSet visited = new HashSet();
-    private Queue<Coord> queue;
+    private Queue<Record> queue = new LinkedList<Record>();
 
-    public BFS (Field field, Coord start) {
+    public BFS(Field field, Coord start) {
         this.field = field;
-        queue.add(start);
+        queue.add(new Record(start, 0));
     }
 
     public void run() {
         while (!queue.isEmpty()) {
-            Coord c = queue.remove();
-            if (check(c))
+            Record r = queue.remove();
+            CheckState state = check(r);
+            if (state == CheckState.STOP)
                 return;
-
-            for (Coord adj : field.getAdjacent(c)) {
-                if (!visited.contains(adj))
-                    queue.add(adj);
+            
+            if (state == CheckState.CONTINUE) {
+                for (Coord adj : field.getAdjacent(r.coord)) {
+                    if (!visited.contains(adj))
+                        queue.add(new Record(adj, r.depth + 1));
+                }
             }
-            visited.add(c);
+            visited.add(r.coord);
         }
     }
     
-    public abstract boolean check(Coord c);
+    public abstract CheckState check(Record r);
 }
