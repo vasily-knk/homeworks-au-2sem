@@ -18,7 +18,7 @@ public class Drunk extends Walking {
     private boolean isSleeping = false;
     private boolean hasBottle = true;
 
-    Drunk(Field field, Coord coord) {
+    public Drunk(Field field, Coord coord) {
         super(field, coord);
     }
 
