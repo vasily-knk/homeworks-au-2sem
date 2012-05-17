@@ -1,10 +1,14 @@
-package ru.spbau.kononenko.drunkgame.Walking;
+package ru.spbau.kononenko.drunkgame.Police;
 
-import ru.spbau.kononenko.drunkgame.*;
+import ru.spbau.kononenko.drunkgame.Logic.Actor;
+import ru.spbau.kononenko.drunkgame.Algorithms.BFSPathFinder;
+import ru.spbau.kononenko.drunkgame.Algorithms.OneOfFilter;
+import ru.spbau.kononenko.drunkgame.Algorithms.PathFinder;
+import ru.spbau.kononenko.drunkgame.Logic.ReportInterface;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
 import ru.spbau.kononenko.drunkgame.Field.FieldObject;
-import ru.spbau.kononenko.drunkgame.Field.Property;
+import ru.spbau.kononenko.drunkgame.Field.FieldObjectProperty;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,14 +21,14 @@ public class Policeman extends Actor {
 
     private final PathFinder pathFinder = new BFSPathFinder();
     private final Arrestable victim;
-    private final PoliceReportInterface reportInterface;
+    private final ReportInterface reportInterface;
     private final Coord home;
 
     private Coord target;
     private State state;
     Queue<Coord> path;
 
-    public Policeman(Field field, Coord coord, Arrestable victim, PoliceReportInterface reportInterface) {
+    public Policeman(Field field, Coord coord, Arrestable victim, ReportInterface reportInterface) {
         super(field, coord);
 
         this.victim = victim;
@@ -62,7 +66,7 @@ public class Policeman extends Actor {
             return;
         }
 
-        if (field.getObject(next) != null)
+        if (getField().getObject(next) != null)
         {
             // Path blocked, invalidate it
             path = null;
@@ -78,7 +82,7 @@ public class Policeman extends Actor {
     }
 
     @Override
-    public boolean getProperty(Property property) {
+    public boolean getProperty(FieldObjectProperty property) {
         return false;
     }
 
@@ -109,17 +113,17 @@ public class Policeman extends Actor {
         ignore.add(null);
         ignore.add(this);
         if (state == State.CHASING) {
-            ignore.add(field.getObject(target));
+            ignore.add(getField().getObject(target));
             
             checkVictimConsistency();
         }
 
-        List<Coord> list = pathFinder.getPath(field, coord, target, ignore);
+        List<Coord> list = pathFinder.getPath(getField(), getCoord(), target, ignore);
         path = (list == null) ? null : new LinkedList<Coord>(list);
     }
     
     private void checkVictimConsistency() {
-        if (field.getObject(victim.getCoord()) != victim)
+        if (getField().getObject(victim.getCoord()) != victim)
             throw new ArrestableNotFoundException("Arrestable not found on reported coord: " + victim.getCoord());
     }
 }

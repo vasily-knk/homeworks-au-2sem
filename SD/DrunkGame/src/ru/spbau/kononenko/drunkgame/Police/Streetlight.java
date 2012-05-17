@@ -1,12 +1,10 @@
-package ru.spbau.kononenko.drunkgame.Static;
+package ru.spbau.kononenko.drunkgame.Police;
 
-import ru.spbau.kononenko.drunkgame.Arrestable;
-import ru.spbau.kononenko.drunkgame.BFS;
-import ru.spbau.kononenko.drunkgame.ArrestableReporter;
+import ru.spbau.kononenko.drunkgame.Drunks.Drunk;
+import ru.spbau.kononenko.drunkgame.Algorithms.BFS;
 import ru.spbau.kononenko.drunkgame.Field.*;
-import ru.spbau.kononenko.drunkgame.Walking.Drunk;
 
-public class Streetlight extends SelfAwareImpl implements ArrestableReporter {
+public class Streetlight extends SelfAwareFieldObject implements ArrestableReporter {
     private final int radius;
 
     public Streetlight(Field field, Coord coord, int radius) {
@@ -18,10 +16,10 @@ public class Streetlight extends SelfAwareImpl implements ArrestableReporter {
         final Arrestable[] res = new Arrestable[1];
         res[0] = null;
 
-        BFS bfs = new BFS(field, coord) {
+        BFS bfs = new BFS(getField(), getCoord()) {
             @Override
             public CheckState check(Record r) {
-                FieldObject object = field.getObject(r.coord);
+                FieldObject object = getField().getObject(r.coord);
                 if (object != null && object.getProperty(Drunk.sleepingDrunkProperty) && (object instanceof Arrestable))
                 {
                     res[0] = (Arrestable)object;
@@ -38,7 +36,7 @@ public class Streetlight extends SelfAwareImpl implements ArrestableReporter {
     }
     
     @Override
-    public boolean getProperty(Property property) {
+    public boolean getProperty(FieldObjectProperty property) {
         return false;
     }
 

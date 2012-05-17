@@ -1,11 +1,10 @@
-package ru.spbau.kononenko.drunkgame.Walking;
+package ru.spbau.kononenko.drunkgame.Logic;
 
-import ru.spbau.kononenko.drunkgame.Dynamic.DynamicObject;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
-import ru.spbau.kononenko.drunkgame.Field.SelfAwareImpl;
+import ru.spbau.kononenko.drunkgame.Field.SelfAwareFieldObject;
 
-public abstract class Actor extends SelfAwareImpl implements DynamicObject {
+public abstract class Actor extends SelfAwareFieldObject implements DynamicObject {
     private boolean dead = false;
 
     public Actor(Field field, Coord coord) {
@@ -18,7 +17,7 @@ public abstract class Actor extends SelfAwareImpl implements DynamicObject {
     }
 
     public void kill() {
-        field.removeObject(coord);
+        getField().removeObject(getCoord());
         dead = true;
     }
 	

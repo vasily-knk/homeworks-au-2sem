@@ -1,12 +1,12 @@
 package ru.spbau.kononenko.drunkgame.Field;
 
-import ru.spbau.kononenko.drunkgame.SelfAwareFieldObject;
+import ru.spbau.kononenko.drunkgame.Logic.SelfAware;
 
-public abstract class SelfAwareImpl implements SelfAwareFieldObject {
-    protected final Field field;
-    protected Coord coord;
+public abstract class SelfAwareFieldObject implements SelfAware, FieldObject {
+    private final Field field;
+    private Coord coord;
     
-    public SelfAwareImpl(Field field, Coord coord) {
+    public SelfAwareFieldObject(Field field, Coord coord) {
         this.field = field;
         this.coord = coord;
         field.setObject(coord, this);

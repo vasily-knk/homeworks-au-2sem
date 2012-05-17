@@ -1,4 +1,4 @@
-package ru.spbau.kononenko.drunkgame;
+package ru.spbau.kononenko.drunkgame.Algorithms;
 
 import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;

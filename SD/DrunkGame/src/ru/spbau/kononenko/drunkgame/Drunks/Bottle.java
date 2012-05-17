@@ -1,13 +1,13 @@
-package ru.spbau.kononenko.drunkgame.Static;
+package ru.spbau.kononenko.drunkgame.Drunks;
 
 import ru.spbau.kononenko.drunkgame.Field.FieldObject;
-import ru.spbau.kononenko.drunkgame.Field.Property;
+import ru.spbau.kononenko.drunkgame.Field.FieldObjectProperty;
 
 public class Bottle implements FieldObject {
-    public static Property bottleProperty = Property.createProperty();
+    public static final FieldObjectProperty bottleProperty = FieldObjectProperty.createProperty();
 
     @Override
-    public boolean getProperty(Property property) {
+    public boolean getProperty(FieldObjectProperty property) {
         if (property == bottleProperty)
             return true;
         return false;

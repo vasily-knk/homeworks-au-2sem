@@ -1,4 +1,4 @@
-package ru.spbau.kononenko.drunkgame.Walking;
+package ru.spbau.kononenko.drunkgame.Police;
 
 public class PolicemanException extends RuntimeException {
     PolicemanException(String message) {

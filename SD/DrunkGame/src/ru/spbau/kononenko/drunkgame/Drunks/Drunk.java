@@ -1,12 +1,12 @@
-package ru.spbau.kononenko.drunkgame.Walking;
+package ru.spbau.kononenko.drunkgame.Drunks;
 
-import ru.spbau.kononenko.drunkgame.Arrestable;
-import ru.spbau.kononenko.drunkgame.Static.Bottle;
+import ru.spbau.kononenko.drunkgame.Logic.Actor;
+import ru.spbau.kononenko.drunkgame.Police.Arrestable;
+import ru.spbau.kononenko.drunkgame.Police.Policeman;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
 import ru.spbau.kononenko.drunkgame.Field.FieldObject;
-import ru.spbau.kononenko.drunkgame.Field.Property;
-import ru.spbau.kononenko.drunkgame.Static.Pillar;
+import ru.spbau.kononenko.drunkgame.Field.FieldObjectProperty;
 
 import java.util.List;
 import java.util.Random;
@@ -14,19 +14,19 @@ import java.util.Random;
 public class Drunk extends Actor implements Arrestable {
     private static final int BOTTLE_DROP_PROBABILITY = 30;
     
-    private Random random = new Random();
+    private final Random random = new Random();
     private boolean isFrozen = false;
     private boolean isSleeping = false;
     private boolean hasBottle = true;
 
-    public static Property sleepingDrunkProperty = Property.createProperty();
+    public static FieldObjectProperty sleepingDrunkProperty = FieldObjectProperty.createProperty();
 
     public Drunk(Field field, Coord coord) {
         super(field, coord);
     }
 
     @Override
-    public boolean getProperty(Property property) {
+    public boolean getProperty(FieldObjectProperty property) {
         if (property == Pillar.freezeProperty)
             return isFrozen;
         else if (property == sleepingDrunkProperty)
@@ -46,11 +46,11 @@ public class Drunk extends Actor implements Arrestable {
 
     @Override
     public void update() {
-        List<Coord> directions = field.getAdjacent(getCoord());
+        List<Coord> directions = getField().getAdjacent(getCoord());
         int index = random.nextInt(directions.size());
         Coord dir = directions.get(index);
 
-        FieldObject other = field.getObject(dir);
+        FieldObject other = getField().getObject(dir);
         if(other == null)
             moveTo(dir);
         else if (other.getProperty(Pillar.freezeProperty))
@@ -80,12 +80,12 @@ public class Drunk extends Actor implements Arrestable {
 
     private void attemptBottleDrop(Coord oldCoord) {
         if (random.nextInt(BOTTLE_DROP_PROBABILITY) == 0) {
-            field.setObject(oldCoord, new Bottle());
+            getField().setObject(oldCoord, new Bottle());
             hasBottle = false;
         }
     }
     private void attemptBottlePickup(Coord dir) {
-        field.removeObject(dir);
+        getField().removeObject(dir);
         super.moveTo(dir);
         fallAsleep();
     }

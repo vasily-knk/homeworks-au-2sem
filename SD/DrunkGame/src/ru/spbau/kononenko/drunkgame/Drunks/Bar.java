@@ -1,21 +1,22 @@
-package ru.spbau.kononenko.drunkgame.Portals;
+package ru.spbau.kononenko.drunkgame.Drunks;
 
-import ru.spbau.kononenko.drunkgame.Dynamic.DynamicControl;
+import ru.spbau.kononenko.drunkgame.Logic.DynamicControl;
+import ru.spbau.kononenko.drunkgame.Logic.Portal;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
-import ru.spbau.kononenko.drunkgame.Walking.Drunk;
 import ru.spbau.kononenko.drunkgame.Field.Field;
 
 public class Bar extends Portal {
-    private static final int SPAWN_EACH = 20;
+    private final int spawnFrequency;
     private int timeElapsed = 0;
     
-    public Bar(Field field, Coord coord, DynamicControl dynamicControl) {
+    public Bar(Field field, Coord coord, DynamicControl dynamicControl, int spawnFrequency) {
         super(field, coord, dynamicControl);
+        this.spawnFrequency = spawnFrequency;
     }
 
     @Override
     public void update() {
-        if (timeElapsed == SPAWN_EACH) {
+        if (timeElapsed == spawnFrequency) {
             if (canSpawn())
                 spawn(new Drunk(field, coord));
             timeElapsed = 0;

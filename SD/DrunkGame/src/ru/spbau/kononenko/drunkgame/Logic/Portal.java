@@ -1,10 +1,7 @@
-package ru.spbau.kononenko.drunkgame.Portals;
+package ru.spbau.kononenko.drunkgame.Logic;
 
-import ru.spbau.kononenko.drunkgame.Dynamic.DynamicControl;
-import ru.spbau.kononenko.drunkgame.Dynamic.DynamicObject;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
-import ru.spbau.kononenko.drunkgame.Walking.Actor;
 
 public abstract class Portal implements DynamicObject {
     protected final Field field;

@@ -1,18 +1,15 @@
 package ru.spbau.kononenko.drunkgame;
 
-import ru.spbau.kononenko.drunkgame.Dynamic.DynamicControl;
-import ru.spbau.kononenko.drunkgame.Dynamic.DynamicObject;
+import ru.spbau.kononenko.drunkgame.Logic.DynamicControl;
+import ru.spbau.kononenko.drunkgame.Logic.DynamicObject;
+import ru.spbau.kononenko.drunkgame.Drunks.Bar;
+import ru.spbau.kononenko.drunkgame.Drunks.Pillar;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
 import ru.spbau.kononenko.drunkgame.Field.RectField;
-import ru.spbau.kononenko.drunkgame.Portals.Bar;
-import ru.spbau.kononenko.drunkgame.Portals.PoliceDept;
-import ru.spbau.kononenko.drunkgame.Static.Pillar;
-import ru.spbau.kononenko.drunkgame.Static.Streetlight;
-import ru.spbau.kononenko.drunkgame.Walking.Drunk;
+import ru.spbau.kononenko.drunkgame.Police.PoliceDept;
+import ru.spbau.kononenko.drunkgame.Police.Streetlight;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,10 +22,10 @@ public class Game implements DynamicControl {
 
     public Game () {
         field = new RectField(15, 15);
-        objectsList.add(new Bar(field, new Coord(9, 0), this));
+        objectsList.add(new Bar(field, new Coord(9, 0), this, 20));
         field.setObject(new Coord(7, 7), new Pillar());
         
-        PoliceDept dept = new PoliceDept(field, new Coord(14, 3), this); 
+        PoliceDept dept = new PoliceDept(field, new Coord(14, 3), this);
         objectsList.add(dept);
 
         Streetlight streetlight = new Streetlight(field, new Coord(10, 3), 3);
