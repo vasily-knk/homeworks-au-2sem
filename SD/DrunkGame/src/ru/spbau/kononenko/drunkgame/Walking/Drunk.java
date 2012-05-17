@@ -18,7 +18,6 @@ public class Drunk extends Actor implements Arrestable {
     private boolean isFrozen = false;
     private boolean isSleeping = false;
     private boolean hasBottle = true;
-    private boolean isArrested = false;
 
     public static Property sleepingDrunkProperty = Property.createProperty();
 

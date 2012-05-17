@@ -1,11 +1,12 @@
 package ru.spbau.kononenko.drunkgame.Static;
 
+import ru.spbau.kononenko.drunkgame.Arrestable;
 import ru.spbau.kononenko.drunkgame.BFS;
-import ru.spbau.kononenko.drunkgame.Searcher;
+import ru.spbau.kononenko.drunkgame.ArrestableReporter;
 import ru.spbau.kononenko.drunkgame.Field.*;
 import ru.spbau.kononenko.drunkgame.Walking.Drunk;
 
-public class Streetlight extends SelfAwareImpl implements Searcher {
+public class Streetlight extends SelfAwareImpl implements ArrestableReporter {
     private final int radius;
 
     public Streetlight(Field field, Coord coord, int radius) {
@@ -13,17 +14,17 @@ public class Streetlight extends SelfAwareImpl implements Searcher {
         this.radius = radius;
     }
     
-    public Coord search() {
-        final Coord[] res = new Coord[1];
+    public Arrestable search() {
+        final Arrestable[] res = new Arrestable[1];
         res[0] = null;
 
         BFS bfs = new BFS(field, coord) {
             @Override
             public CheckState check(Record r) {
                 FieldObject object = field.getObject(r.coord);
-                if (object != null && object.getProperty(Drunk.sleepingDrunkProperty))
+                if (object != null && object.getProperty(Drunk.sleepingDrunkProperty) && (object instanceof Arrestable))
                 {
-                    res[0] = r.coord;
+                    res[0] = (Arrestable)object;
                     return CheckState.STOP;
                 }
                     

@@ -9,17 +9,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BFSPathFinder implements PathFinder {
-    private Field field;
-    private FilterInterface<FieldObject> ignore;
     private HashMap<Coord, Coord> parents = new HashMap<Coord, Coord>();
-    
-    public BFSPathFinder(Field field, FilterInterface<FieldObject> ignore) {
-        this.field = field;
-        this.ignore = ignore;
-    }    
-    
+
+
     @Override
-    public List<Coord> getPath(Coord src, final Coord dst) {
+    public List<Coord> getPath(final Field field, final Coord src, final Coord dst, final FilterInterface<FieldObject> ignore) {
         if (!ignore.accept(field.getObject(dst)))
             return null;
         
@@ -46,7 +40,7 @@ public class BFSPathFinder implements PathFinder {
         
         LinkedList<Coord> res = new LinkedList<Coord>();
         Coord c = dst;
-        while (c != null) {
+        while (parents.get(c) != null) {
             res.addFirst(c);
             c = parents.get(c);
         }

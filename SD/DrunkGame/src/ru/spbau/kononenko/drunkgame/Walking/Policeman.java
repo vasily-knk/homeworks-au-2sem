@@ -14,49 +14,62 @@ public class Policeman extends Actor {
     private enum State {
         CHASING, RETURNING
     }
-    
+
+    private final PathFinder pathFinder = new BFSPathFinder();
+    private final Arrestable victim;
+    private final PoliceReportInterface reportInterface;
     private final Coord home;
-    private PoliceReportInterface reportInterface;
-    //private PathFinder pathFinder;
+
     private Coord target;
     private State state;
     Queue<Coord> path;
 
-    public Policeman(Field field, Coord coord, Coord target, PoliceReportInterface reportInterface) {
+    public Policeman(Field field, Coord coord, Arrestable victim, PoliceReportInterface reportInterface) {
         super(field, coord);
-        home = coord;
-        this.target = target;
+
+        this.victim = victim;
         this.reportInterface = reportInterface;
-        //this.pathFinder = new BFSPathFinder();
+
+        home = coord;
         startChase();
     }
 
     @Override
     public void update() {
+        // No path. Search again.
         if (path == null) {
             updatePath();
             return;
         }
-
-        if (state == State.RETURNING && path.isEmpty()) {
-            reportInterface.report();
-            kill();
+        
+        if (path.isEmpty()) {
+            if (state == State.RETURNING) {
+                report();
+            } else {
+                // Came to the location but no one is found. Search again.
+                updatePath();
+            }
             return;
         }
 
         Coord next = path.remove();
 
-        if (state == State.CHASING && next.equals(target))
+        if (state == State.CHASING && next.equals(victim.getCoord()))
         {
-            ((Arrestable) field.getObject(target)).arrest(this);
+            checkVictimConsistency();
+            victim.arrest(this);
             startReturn();
             return;
         }
 
         if (field.getObject(next) != null)
-            updatePath();
-        else
-            moveTo(next);
+        {
+            // Path blocked, invalidate it
+            path = null;
+            return;
+        }
+
+        moveTo(next);
     }
 
     @Override
@@ -74,26 +87,39 @@ public class Policeman extends Actor {
         return '!';
     }
     
+    private void report() {
+        reportInterface.report();
+        kill();
+        
+    }
     private void startChase() {
         state = State.CHASING;
+        target = victim.getCoord();
         updatePath();
     }
+
     private void startReturn() {
         state = State.RETURNING;
         target = home;
         updatePath();
     }
+
     private void updatePath() {
         OneOfFilter<FieldObject> ignore = new OneOfFilter<FieldObject>();
         ignore.add(null);
         ignore.add(this);
-        if (state == State.CHASING)
+        if (state == State.CHASING) {
             ignore.add(field.getObject(target));
+            
+            checkVictimConsistency();
+        }
 
-        BFSPathFinder pathFinder = new BFSPathFinder(field, ignore);
-        List<Coord> list = pathFinder.getPath(coord, target);
+        List<Coord> list = pathFinder.getPath(field, coord, target, ignore);
         path = (list == null) ? null : new LinkedList<Coord>(list);
-        if (path != null)
-            path.remove();
+    }
+    
+    private void checkVictimConsistency() {
+        if (field.getObject(victim.getCoord()) != victim)
+            throw new ArrestableNotFoundException("Arrestable not found on reported coord: " + victim.getCoord());
     }
 }
