@@ -1,12 +1,10 @@
 package ru.spbau.kononenko.drunkgame.Walking;
 
-import ru.spbau.kononenko.drunkgame.Arrestable;
+import ru.spbau.kononenko.drunkgame.*;
 import ru.spbau.kononenko.drunkgame.Field.Coord;
 import ru.spbau.kononenko.drunkgame.Field.Field;
 import ru.spbau.kononenko.drunkgame.Field.FieldObject;
 import ru.spbau.kononenko.drunkgame.Field.Property;
-import ru.spbau.kononenko.drunkgame.PathFinder;
-import ru.spbau.kononenko.drunkgame.PoliceReportInterface;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +17,7 @@ public class Policeman extends Actor {
     
     private final Coord home;
     private PoliceReportInterface reportInterface;
-    private PathFinder pathFinder;
+    //private PathFinder pathFinder;
     private Coord target;
     private State state;
     Queue<Coord> path;
@@ -29,6 +27,8 @@ public class Policeman extends Actor {
         home = coord;
         this.target = target;
         this.reportInterface = reportInterface;
+        //this.pathFinder = new BFSPathFinder();
+        startChase();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Policeman extends Actor {
 
         Coord next = path.remove();
 
-        if (state == State.CHASING && next == target)
+        if (state == State.CHASING && next.equals(target))
         {
             ((Arrestable) field.getObject(target)).arrest(this);
             startReturn();
@@ -84,8 +84,15 @@ public class Policeman extends Actor {
         updatePath();
     }
     private void updatePath() {
+        OneOfFilter<FieldObject> ignore = new OneOfFilter<FieldObject>();
+        ignore.add(null);
+        ignore.add(this);
+        if (state == State.CHASING)
+            ignore.add(field.getObject(target));
+
+        BFSPathFinder pathFinder = new BFSPathFinder(field, ignore);
         List<Coord> list = pathFinder.getPath(coord, target);
-        path = (list == null) ? null : new LinkedList<Coord>(path);
+        path = (list == null) ? null : new LinkedList<Coord>(list);
         if (path != null)
             path.remove();
     }

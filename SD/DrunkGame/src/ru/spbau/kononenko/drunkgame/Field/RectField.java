@@ -30,14 +30,20 @@ public class RectField extends Field2D {
 
     @Override
     public void draw() {
+        System.out.println(this);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder(width * height);
         for (int j = 0; j < height; ++j) {
-            StringBuilder builder = new StringBuilder(width);
             for (int i = 0; i < width; ++i)
             {
                 FieldObject o = getObject(new Coord(i, j));
                 builder.append(o == null ? '.' : o.getChar());
             }
-            System.out.println(builder);
+            builder.append('\n');
         }
+        return builder.toString();
     }
 }

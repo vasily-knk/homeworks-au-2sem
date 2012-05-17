@@ -34,6 +34,7 @@ public class PoliceDept extends Portal {
     }
 
     private void tryToSendPoliceman(Coord res) {
+        policemanIsOut = true;
         if (canSpawn()) {
             spawn(new Policeman(field, coord, res, new PoliceReportInterface() {
                 @Override

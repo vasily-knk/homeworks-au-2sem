@@ -9,6 +9,7 @@ import ru.spbau.kononenko.drunkgame.Portals.Bar;
 import ru.spbau.kononenko.drunkgame.Portals.PoliceDept;
 import ru.spbau.kononenko.drunkgame.Static.Pillar;
 import ru.spbau.kononenko.drunkgame.Static.Streetlight;
+import ru.spbau.kononenko.drunkgame.Walking.Drunk;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -32,6 +33,9 @@ public class Game implements DynamicControl {
 
         Streetlight streetlight = new Streetlight(field, new Coord(10, 3), 3);
         dept.addSearcher(streetlight);
+
+        //Drunk drunk = new Drunk(field, new Coord(9, 3));
+        //drunk.fallAsleep();
     }
 
     @Override

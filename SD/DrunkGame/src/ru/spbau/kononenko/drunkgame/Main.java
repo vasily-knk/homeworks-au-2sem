@@ -5,7 +5,7 @@ public class Main {
         Game game = new Game();
         for (int i = 0; i < 1000; ++i) {
             game.update();
-            if (i % 100 == 0)
+            //if (i % 100 == 0)
                 game.output();
         }
     }

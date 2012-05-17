@@ -38,10 +38,10 @@ public class Drunk extends Actor implements Arrestable {
 
     @Override
     public char getChar() {
-        if (isFrozen)
-            return '1';
         if (isSleeping)
             return '&';
+        if (isFrozen)
+            return '1';
         return '@';
     }
 
@@ -88,7 +88,7 @@ public class Drunk extends Actor implements Arrestable {
     private void attemptBottlePickup(Coord dir) {
         field.removeObject(dir);
         super.moveTo(dir);
-        isSleeping = true;
+        fallAsleep();
     }
 
     @Override
@@ -96,4 +96,7 @@ public class Drunk extends Actor implements Arrestable {
         kill();
     }
 
+    public void fallAsleep() {
+        isSleeping = true;
+    }
 }
