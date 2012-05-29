@@ -10,12 +10,28 @@ module Map
 import Prelude hiding (lookup)
 import Tree
 
-data Map k v = MapTree (k, v) (k, v) | EmptyMap
+data Map k v = MapTree (Tree (k, v) (k, v)) | EmptyMap
+
+-- lookup :: Ord k => k -> Map k v -> Maybe v
+-- lookup k' EmptyMap = Nothing
+-- lookup k' (MapTree (Leaf (k, v))) 
+-- 	| k' == k = Just v
+-- 	| otherwise = Nothing
+-- lookup k' (MapTree (Branch l (k, v) r)) 
+-- 	| k' == k = Just v
+-- 	| otherwise = chooseone (lookup l) (lookup r) where
+-- 		chooseone (Just v) _ = v
+-- 		chooseone _ r = r
 
 lookup :: Ord k => k -> Map k v -> Maybe v
-lookup = undefined
+lookup k' EmptyMap = Nothing
+lookup k' MapTree t = lookupTree t where
+	lookupTree
+	MapTree (Leaf (k, v)) =
 
--- Возвращает обновленное дерево и Nothing, если до этого в дереве не было ключа k, и Just v, если в дереве по ключу k было значение v
+
+		
+		-- Возвращает обновленное дерево и Nothing, если до этого в дереве не было ключа k, и Just v, если в дереве по ключу k было значение v
 insert :: Ord k => k -> v -> Map k v -> (Map k v, Maybe v)
 insert = undefined
 

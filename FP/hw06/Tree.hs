@@ -14,12 +14,17 @@ height (Branch a _ b) = max (height a) (height b) + 1
 
 -- Возвращает среднее арифметическое значений во всех узлах дерева
 -- Необходимо вычислить эту функцию, выполнив один проход по дереву
-avg :: Tree Int Int -> Int
-avg t = avg $ helper [] t where
-	helper acc (Leaf b) = acc ++ [b]
-	helper acc (Branch l a r) = helper acc l ++ [a] ++ helper acc r;
-	avg lst = div (sum lst) (fromIntegral $ length lst)
 
+avg :: Tree Int Int -> Int
+avg t = dv $ calc t where
+	dv (a, b) = div a b;
+	calc (Leaf b) = (b, 1)
+	calc (Branch l a r) = tpls (tpls (calc l) (calc r)) (a, 1) where
+		tpls (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
+
+
+
+	
 -- Возвращает ширину дерева
 -- Ширина дерева определяется следующим образом:
 -- Количество вершин на определенном уровне называется шириной уровня.
@@ -28,7 +33,7 @@ width :: Tree a b -> Int
 width t = maximum $ level [] 0 t where
 	updlst lst n 
 		| length lst == n = lst ++ [1]
-		| length lst > n = part1 ++ [head part2 + 1] ++ tail part2
+		| length lst > n = part1 ++ ((head part2 + 1) : tail part2)
 		| otherwise = undefined where
 			part1 = take n lst;
 			part2 = drop n lst;
