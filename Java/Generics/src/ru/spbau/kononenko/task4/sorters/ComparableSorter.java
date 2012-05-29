@@ -5,6 +5,11 @@ import ru.spbau.kononenko.task4.comparators.DefaultComparator;
 
 import java.util.List;
 
+/**
+ * The sorter abstract class for comparable objects.
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 abstract class ComparableSorter implements Sorter {
     @Override
     public <T extends MyComparable<? super T>> void sort(List<T> list) {

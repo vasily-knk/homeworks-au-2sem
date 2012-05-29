@@ -1,5 +1,10 @@
 package ru.spbau.kononenko.task4.comparables;
 
+/**
+ * The comparable string type.
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+ */
 public class ComparableString extends Keeper<String> implements MyComparable<ComparableString> {
 
     /**

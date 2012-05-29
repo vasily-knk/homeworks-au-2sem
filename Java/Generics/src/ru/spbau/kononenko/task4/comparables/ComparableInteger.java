@@ -2,7 +2,9 @@ package ru.spbau.kononenko.task4.comparables;
 
 /**
  * Comparable Integer.
- */
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public class ComparableInteger extends Keeper<Integer> implements MyComparable<ComparableInteger> {
 
     /**

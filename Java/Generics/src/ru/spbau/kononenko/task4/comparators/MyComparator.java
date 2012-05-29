@@ -3,6 +3,8 @@ package ru.spbau.kononenko.task4.comparators;
 /**
  * Comparator interface.
  * @param <T>  the type of objects that may be compared by this comparator
+ * @author Vasily Kononenko
+ * @version %I%, %G%
  */
 public interface MyComparator<T> {
     /**

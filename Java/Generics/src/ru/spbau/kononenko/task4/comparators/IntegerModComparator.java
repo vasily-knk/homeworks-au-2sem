@@ -4,7 +4,9 @@ import ru.spbau.kononenko.task4.comparables.ComparableInteger;
 
 /**
  * Integer mod comparator.
- */
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public class IntegerModComparator implements MyComparator<ComparableInteger> {
     private int n;
 

@@ -5,6 +5,8 @@ import java.util.List;
 /**
  * Generator interface.
  * @param <T> the type of objects to generate.
+ * @author Vasily Kononenko
+ * @version %I%, %G%
  */
 public interface Generator<T> {
     /**

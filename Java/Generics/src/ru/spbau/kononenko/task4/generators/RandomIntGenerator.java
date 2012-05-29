@@ -9,6 +9,8 @@ import java.util.Random;
 /**
  * Random ComparableInteger generator.
  * Generates values in [0..max) range.
+ * @author Vasily Kononenko
+ * @version %I%, %G%
  */
 public class RandomIntGenerator implements Generator<ComparableInteger> {
     private final Random random = new Random();

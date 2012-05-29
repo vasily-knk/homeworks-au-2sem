@@ -7,7 +7,9 @@ import java.util.List;
 
 /**
  * The sorter interface.
- */
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public interface Sorter {
     /**
      * Sorts the specified list of comparable objects.

@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * The shaker sort class.
+ * @author Vasily Kononenko
+ * @version %I%, %G%
  */
 public class ShakerSort extends ComparableSorter {
     @Override

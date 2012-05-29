@@ -20,7 +20,9 @@ import java.util.Random;
 
 /**
  * The main class.
- */
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public class Main {
     /**
      * The entry point.

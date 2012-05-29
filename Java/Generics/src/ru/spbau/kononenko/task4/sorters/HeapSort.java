@@ -6,7 +6,9 @@ import java.util.List;
 
 /**
  * The heap sort class.
- */
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public class HeapSort extends ComparableSorter {
     @Override
     public <T> void sort(List<T> list, MyComparator<? super T> comparator) {

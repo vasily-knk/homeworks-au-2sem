@@ -3,8 +3,13 @@ package ru.spbau.kononenko.task4.comparables;
 /**
  * Class for objects keeping its value inside (like ComparableInteger).
  * @param <T>
- */
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public class Keeper<T> {
+    /**
+     * the value kept.
+     */
     protected T value;
 
     /**

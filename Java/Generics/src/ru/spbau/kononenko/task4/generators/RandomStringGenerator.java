@@ -9,7 +9,9 @@ import java.util.Random;
 /**
  * Random ComparableString generator.
  * Generate strings up to maxLength characters long.
- */
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public class RandomStringGenerator implements Generator<ComparableString> {
     private final Random random = new Random();
     private final int maxLength;

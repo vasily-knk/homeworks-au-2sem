@@ -5,7 +5,9 @@ import ru.spbau.kononenko.task4.comparables.MyComparable;
 /**
  * Default comparator for comparable objects.
  * @param <T> the comparable object type
- */
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public class DefaultComparator<T extends MyComparable<? super T>> implements MyComparator<T> {
 
     @Override

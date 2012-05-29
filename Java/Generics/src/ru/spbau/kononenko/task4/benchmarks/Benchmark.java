@@ -8,7 +8,9 @@ import java.util.List;
 
 /**
  * Benchmark interface for different sorters.
- */
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public interface Benchmark {
     /**
      * Returns the time it took to sort the specified list using the specified sorter.

@@ -3,7 +3,9 @@ package ru.spbau.kononenko.task4.comparables;
 /**
  * Interface for comparable types.
  * @param <T> the type of objects that this object may be compared to
- */
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public interface MyComparable<T> {
     /**
      * Compares this object with the specified object.
