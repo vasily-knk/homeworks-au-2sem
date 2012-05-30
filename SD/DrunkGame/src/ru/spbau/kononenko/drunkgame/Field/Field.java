@@ -2,8 +2,19 @@ package ru.spbau.kononenko.drunkgame.Field;
 
 public abstract class Field implements FieldGeometry {
     public abstract FieldObject getObject(Coord coord);
-    public abstract void setObject(Coord coord, FieldObject object);
-    public abstract void removeObject(Coord coord);
+
+    public void setObject(Coord coord, FieldObject object) {
+        if (getObject(coord) != null)
+            throw new FieldOccupiedException(coord.toString());
+        object.onPlace(coord);
+    }
+
+    public void removeObject(Coord coord) {
+        FieldObject object = getObject(coord);
+        if (object == null)
+            throw new FieldFreeException(coord.toString());
+        object.onRemove(coord);
+    }
 
     public void moveObject(Coord src, Coord dst) {
         if (src.equals(dst))

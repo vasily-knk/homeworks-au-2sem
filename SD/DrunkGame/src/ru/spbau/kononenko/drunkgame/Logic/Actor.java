@@ -12,12 +12,19 @@ public abstract class Actor extends SelfAwareFieldObject implements DynamicObjec
     }
 
     @Override
+    protected void moveTo(Coord c) {
+        if (isDead())
+            throw new MovingDeadActorException(this);
+        super.moveTo(c);
+    }
+
+    @Override
     public boolean isDead() {
         return dead;
     }
 
     public void kill() {
-        getField().removeObject(getCoord());
+        remove();
         dead = true;
     }
 	

@@ -29,16 +29,14 @@ public abstract class Field2D extends Field {
     @Override
     public void setObject(Coord coord, FieldObject object) {
         assertInside(coord);
-        if (data[coord.x][coord.y] != null)
-            throw new FieldOccupiedException(coord.toString());
+        super.setObject(coord, object);
         data[coord.x][coord.y] = object;
     }
 
     @Override
     public void removeObject(Coord coord) {
         assertInside(coord);
-        if (data[coord.x][coord.y] == null)
-            throw new FieldFreeException(coord.toString());
+        super.removeObject(coord);
         data[coord.x][coord.y] = null;
     }
 

@@ -2,8 +2,9 @@ package ru.spbau.kononenko.drunkgame.Drunks;
 
 import ru.spbau.kononenko.drunkgame.Field.FieldObject;
 import ru.spbau.kononenko.drunkgame.Field.FieldObjectProperty;
+import ru.spbau.kononenko.drunkgame.Field.StaticFieldObject;
 
-public class Bottle implements FieldObject {
+public class Bottle extends StaticFieldObject {
     public static final FieldObjectProperty bottleProperty = FieldObjectProperty.createProperty();
 
     @Override
@@ -17,4 +18,5 @@ public class Bottle implements FieldObject {
     public char getChar() {
         return 'B';
     }
+
 }

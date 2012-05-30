@@ -1,5 +1,6 @@
 package ru.spbau.kononenko.drunkgame.Drunks;
 
+import ru.spbau.kononenko.drunkgame.Freeze;
 import ru.spbau.kononenko.drunkgame.Logic.Actor;
 import ru.spbau.kononenko.drunkgame.Police.Arrestable;
 import ru.spbau.kononenko.drunkgame.Police.Policeman;
@@ -27,7 +28,7 @@ public class Drunk extends Actor implements Arrestable {
 
     @Override
     public boolean getProperty(FieldObjectProperty property) {
-        if (property == Pillar.freezeProperty)
+        if (property == Freeze.freezeProperty)
             return isFrozen;
         else if (property == sleepingDrunkProperty)
             return isSleeping;
@@ -53,10 +54,10 @@ public class Drunk extends Actor implements Arrestable {
         FieldObject other = getField().getObject(dir);
         if(other == null)
             moveTo(dir);
-        else if (other.getProperty(Pillar.freezeProperty))
+        else if (other.getProperty(Freeze.freezeProperty))
             freeze();
         else if (other.getProperty(Bottle.bottleProperty))
-            attemptBottlePickup(dir);
+            pickupBottle(dir);
     }
 
 
@@ -84,7 +85,8 @@ public class Drunk extends Actor implements Arrestable {
             hasBottle = false;
         }
     }
-    private void attemptBottlePickup(Coord dir) {
+
+    private void pickupBottle(Coord dir) {
         getField().removeObject(dir);
         super.moveTo(dir);
         fallAsleep();
