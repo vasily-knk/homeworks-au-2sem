@@ -4,47 +4,59 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-public class GetSetProperty<T> implements ClassProperty<T> {
-    final Class<T> clazz;
-    final String name;
-    
-    Method getter = null;
-    Method setter = null;
+public class GetSetProperty implements Property {
+    private Object obj;
+    private String name;
+    private Method getter = null;
+    private Method setter = null;
+    private Method valueOf;
 
-    public GetSetProperty(Class<T> clazz, String name) {
-        this.clazz = clazz;
+    public GetSetProperty(Object obj, String name) throws PropertyNotFoundException, UnsupportedPropertyTypeException {
+        this.obj = obj;
+        if (name.length() == 0)
+            throw new PropertyNotFoundException(obj.getClass(), name);
+
         this.name = name;
-        
-        if (name.length() < 1 || name.charAt(0) < 'a' || name.charAt(0) > 'z')
-            throw new PropertyNotFoundException(clazz, name);
 
-        final String fixedName = name.substring(0, 1).toUpperCase() + name.substring(1);
-        
-        final String getterName = "get" + fixedName;
+        String newName = name.substring(0, 1).toUpperCase() + name.substring(1);
         try {
-            getter = clazz.getMethod(getterName);
+            getter = obj.getClass().getMethod("get" + newName);
         } catch (NoSuchMethodException e) {
-            throw new PropertyNotFoundException(clazz, name);
-        }
-        
-        if (!Modifier.isPublic(getter.getModifiers()))
-            throw new PropertyNotFoundException(clazz, name);
-
-        final String setterName = "set" + fixedName;
-        try {
-            setter = clazz.getMethod(setterName, getType());
-        } catch (NoSuchMethodException e) {
-            // setter not found, so the property is read-only
+            throw new PropertyNotFoundException(obj.getClass(), name);           
         }
 
-        if (!Modifier.isPublic(setter.getModifiers()))
-            setter = null;
+        Class<?> propertyType = getter.getReturnType();
+        
+        valueOf = getValueOfMethod(propertyType);
+        if (valueOf == null)
+            throw new UnsupportedPropertyTypeException(propertyType);
+
+        try {
+            setter = obj.getClass().getMethod("set" + newName, propertyType);
+        } catch (NoSuchMethodException e) {
+            // setter = null, ok
+        }
+    }
+
+    
+    @Override
+    public String get() {
+        Object arg;
+        try {
+            arg = getter.invoke(obj);
+        } catch (IllegalAccessException e) {
+            throw new UnexpectedException(e);
+        } catch (InvocationTargetException e) {
+            throw new UnexpectedException(e);
+        }
+        return arg.toString();
     }
 
     @Override
-    public Object get(T obj) {
+    public void set(String value) {
         try {
-            return getter.invoke(obj);
+            Object arg = valueOf.invoke(null, value);
+            setter.invoke(obj, arg);
         } catch (IllegalAccessException e) {
             throw new UnexpectedException(e);
         } catch (InvocationTargetException e) {
@@ -53,26 +65,51 @@ public class GetSetProperty<T> implements ClassProperty<T> {
     }
 
     @Override
-    public void set(T obj, Object value) {
-        if (!isWritable())
-            throw new PropertyReadOnlyException(clazz, name);
+    public boolean isReadonly() {
+        return setter == null;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public static boolean isSupportedType(Class<?> type) {
+        return getValueOfMethod(type) != null;
+    }
+    
+    // Секция костылей и велосипедов
+    
+    private static Method getValueOfMethod(Class<?> type) {
         try {
-            setter.invoke(obj, value);
-        } catch (IllegalAccessException e) {
-            throw new UnexpectedException(e);
-        } catch (InvocationTargetException e) {
-            throw new UnexpectedException(e);
+            if (type == String.class)
+                return GetSetProperty.class.getDeclaredMethod("stringIdle", String.class);
+        
+            Class<?> realClass = getNonPrimitive(type);
+            return realClass.getMethod("valueOf", String.class);
+        } catch (NoSuchMethodException e) {
+            // Yeah, I hate using exceptions in logic myself
+            return null;
         }
     }
 
-    @Override
-    public Class<?> getType() {
-        return getter.getReturnType();
+    private static Class<?> getNonPrimitive(Class<?> clazz) {
+        if (clazz == Integer.TYPE)
+            return Integer.class;
+        if (clazz == Float.TYPE)
+            return Float.class;
+        if (clazz == Double.TYPE)
+            return Double.class;
+        if (clazz == Boolean.TYPE)
+            return Boolean.class;
+        if (clazz == Character.TYPE)
+            return Character.class;
+
+        return clazz;
     }
 
-    @Override
-    public boolean isWritable() {
-        return (setter != null);
+    private static String stringIdle(String str) {
+        return str;
     }
 
 }
