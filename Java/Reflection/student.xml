@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Serialization</comment>
+<entry key="avgGrade">3.14</entry>
+<entry key="secret">86</entry>
+<entry key="age">12</entry>
+<entry key="name">Vasily</entry>
+<entry key="surname">Pupkin</entry>
+</properties>

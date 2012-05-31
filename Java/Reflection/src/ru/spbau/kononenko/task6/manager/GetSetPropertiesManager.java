@@ -1,13 +1,21 @@
-package ru.spbau.kononenko.task6;
+package ru.spbau.kononenko.task6.manager;
+
+import ru.spbau.kononenko.task6.property.*;
+import ru.spbau.kononenko.task6.property.UnexpectedException;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Properties manager used to manipulate properties with get/set methods.
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+ */
 public class GetSetPropertiesManager implements PropertiesManager {
     @Override
     public <T> Property getProperty(T t, String name) throws UnsupportedPropertyTypeException,
-                                                             PropertyNotFoundException {
+            PropertyNotFoundException {
         return new GetSetProperty(t, name);
     }
 
@@ -19,7 +27,7 @@ public class GetSetPropertiesManager implements PropertiesManager {
                 continue;
             
             if(m.getName().substring(0, 3).equals("get")) {
-                String newName = m.getName().substring(3, 4).toUpperCase() 
+                String newName = m.getName().substring(3, 4).toLowerCase()
                                + m.getName().substring(4);
                 
                 try {

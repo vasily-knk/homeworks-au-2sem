@@ -4,8 +4,9 @@ import java.util.Random;
 
 /**
  * The class to (de)serialize.
- *
- */
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public class Student {
     private String name = "N/A";
     private String surname = "N/A";
@@ -45,6 +46,10 @@ public class Student {
         this.avgGrade = avgGrade;
     }
 
+    /**
+     * The read-only field
+     * @return
+     */
     public int getSecret() {
         return secret;
     }

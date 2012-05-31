@@ -1,9 +1,13 @@
-package ru.spbau.kononenko.task6;
+package ru.spbau.kononenko.task6.property;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 
+/**
+ * Class for properties with get/set methods.
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public class GetSetProperty implements Property {
     private Object obj;
     private String name;
@@ -11,14 +15,22 @@ public class GetSetProperty implements Property {
     private Method setter = null;
     private Method valueOf;
 
+    /**
+     * The constructor. I guess this class should be GetSetPropertiesManager inner class,
+     * but it would render the code unreadable.
+     * @param obj the object whose property is required
+     * @param name the property name
+     * @throws PropertyNotFoundException if the property doesn't exist
+     * @throws UnsupportedPropertyTypeException if the property type is not supported
+     */
     public GetSetProperty(Object obj, String name) throws PropertyNotFoundException, UnsupportedPropertyTypeException {
         this.obj = obj;
         if (name.length() == 0)
             throw new PropertyNotFoundException(obj.getClass(), name);
 
         this.name = name;
-
         String newName = name.substring(0, 1).toUpperCase() + name.substring(1);
+
         try {
             getter = obj.getClass().getMethod("get" + newName);
         } catch (NoSuchMethodException e) {
@@ -53,7 +65,9 @@ public class GetSetProperty implements Property {
     }
 
     @Override
-    public void set(String value) {
+    public void set(String value) throws PropertyReadOnlyException {
+        if (setter == null)
+            throw new PropertyReadOnlyException(obj.getClass(), getName());
         try {
             Object arg = valueOf.invoke(null, value);
             setter.invoke(obj, arg);
@@ -74,7 +88,8 @@ public class GetSetProperty implements Property {
         return name;
     }
 
-    public static boolean isSupportedType(Class<?> type) {
+    @Override
+    public boolean isSupportedType(Class<?> type) {
         return getValueOfMethod(type) != null;
     }
     

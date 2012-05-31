@@ -1,4 +1,4 @@
-package ru.spbau.kononenko.task6;
+package ru.spbau.kononenko.task6.property;
 
 public class UnsupportedPropertyTypeException extends Exception {
     public UnsupportedPropertyTypeException(Class<?> type) {

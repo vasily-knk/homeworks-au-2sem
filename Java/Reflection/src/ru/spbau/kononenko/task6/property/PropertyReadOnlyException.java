@@ -1,8 +1,10 @@
-package ru.spbau.kononenko.task6;
+package ru.spbau.kononenko.task6.property;
 
 /**
  * The excpetion to be thrown when trying to modify a read-only property
- */
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public class PropertyReadOnlyException extends Exception {
     /**
      *
