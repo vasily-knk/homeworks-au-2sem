@@ -1,5 +1,7 @@
 package ru.spbau.kononenko.drunkgame;
 
+import ru.spbau.kononenko.drunkgame.game.Game;
+
 public class Main {
     public static void main(String[] args) {
         Game game = new Game();

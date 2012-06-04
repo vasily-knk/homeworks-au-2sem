@@ -1,9 +1,9 @@
-package ru.spbau.kononenko.drunkgame.Drunks;
+package ru.spbau.kononenko.drunkgame.drunks;
 
-import ru.spbau.kononenko.drunkgame.Logic.DynamicControl;
-import ru.spbau.kononenko.drunkgame.Logic.Portal;
-import ru.spbau.kononenko.drunkgame.Field.Coord;
-import ru.spbau.kononenko.drunkgame.Field.Field;
+import ru.spbau.kononenko.drunkgame.game.DynamicControl;
+import ru.spbau.kononenko.drunkgame.common_actors.Portal;
+import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
+import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
 
 public class Bar extends Portal {
     private final int spawnFrequency;

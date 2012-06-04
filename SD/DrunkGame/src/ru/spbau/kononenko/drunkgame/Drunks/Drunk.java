@@ -1,13 +1,12 @@
-package ru.spbau.kononenko.drunkgame.Drunks;
+package ru.spbau.kononenko.drunkgame.drunks;
 
-import ru.spbau.kononenko.drunkgame.Freeze;
-import ru.spbau.kononenko.drunkgame.Logic.Actor;
-import ru.spbau.kononenko.drunkgame.Police.Arrestable;
-import ru.spbau.kononenko.drunkgame.Police.Policeman;
-import ru.spbau.kononenko.drunkgame.Field.Coord;
-import ru.spbau.kononenko.drunkgame.Field.Field;
-import ru.spbau.kononenko.drunkgame.Field.FieldObject;
-import ru.spbau.kononenko.drunkgame.Field.FieldObjectProperty;
+import ru.spbau.kononenko.drunkgame.common_actors.Actor;
+import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
+import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
+import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;
+import ru.spbau.kononenko.drunkgame.field.objects.FieldObjectProperty;
+import ru.spbau.kononenko.drunkgame.police.arrestable.Arrestable;
+import ru.spbau.kononenko.drunkgame.police.policeman.Policeman;
 
 import java.util.List;
 import java.util.Random;

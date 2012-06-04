@@ -1,8 +1,7 @@
-package ru.spbau.kononenko.drunkgame.Drunks;
+package ru.spbau.kononenko.drunkgame.drunks;
 
-import ru.spbau.kononenko.drunkgame.Field.FieldObject;
-import ru.spbau.kononenko.drunkgame.Field.FieldObjectProperty;
-import ru.spbau.kononenko.drunkgame.Field.StaticFieldObject;
+import ru.spbau.kononenko.drunkgame.field.objects.FieldObjectProperty;
+import ru.spbau.kononenko.drunkgame.field.objects.StaticFieldObject;
 
 public class Bottle extends StaticFieldObject {
     public static final FieldObjectProperty bottleProperty = FieldObjectProperty.createProperty();
