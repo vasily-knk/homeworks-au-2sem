@@ -6,49 +6,46 @@ import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
 import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-public class BFSPathFinder implements PathFinder {
+public class BFSOldPathFinder implements OldPathFinder {
     private HashMap<Coord, Coord> parents = new HashMap<Coord, Coord>();
-    private Coord dst;
+
 
     @Override
-    public Coord getNext(final Field field, final Coord src, final FilterInterface<Coord> dstFilter, 
-                         final FilterInterface<FieldObject> ignore) {
+    public List<Coord> getPath(final Field field, final Coord src, final Coord dst, final FilterInterface<FieldObject> ignore) {
+        if (!ignore.accept(field.getObject(dst)))
+            return null;
         
         parents.clear();
-        dst = null;
-
+        
         BFS bfs = new BFS(field, src) {
             @Override
             public CheckState check(Record r) {
                 if (!ignore.accept(field.getObject(r.coord)))
                     return CheckState.CUT;
-
+                
                 parents.put(r.coord, r.parent);
-
-                if (dstFilter.accept(r.coord)) {
-                    dst = r.coord;
+                if (r.coord.equals(dst))
                     return CheckState.STOP;
-                }
-
+                
                 return CheckState.CONTINUE;
             }
         };
 
         bfs.run();
-
-        if (dst == null)
+        
+        if (!parents.containsKey(dst))
             return null;
         
+        ArrayList<Coord> res = new ArrayList<Coord>();
         Coord c = dst;
-        while (parents.get(c) != src) {
+        while (parents.get(c) != null) {
+            res.add(c);
             c = parents.get(c);
         }
-        
-        return c;
+        Collections.reverse(res);
+
+        return res;
     }
 }

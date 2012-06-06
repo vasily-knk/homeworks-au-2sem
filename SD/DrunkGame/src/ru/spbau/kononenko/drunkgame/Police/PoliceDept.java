@@ -1,12 +1,13 @@
 package ru.spbau.kononenko.drunkgame.police;
 
+import ru.spbau.kononenko.drunkgame.common_actors.ReturnReportInterface;
 import ru.spbau.kononenko.drunkgame.game.DynamicControl;
 import ru.spbau.kononenko.drunkgame.common_actors.Portal;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
 import ru.spbau.kononenko.drunkgame.police.arrestable.Arrestable;
+import ru.spbau.kononenko.drunkgame.police.policeman.OldPoliceman;
 import ru.spbau.kononenko.drunkgame.police.policeman.Policeman;
-import ru.spbau.kononenko.drunkgame.police.policeman.PolicemanReportInterface;
 import ru.spbau.kononenko.drunkgame.police.reporters.ArrestableReporter;
 
 import java.util.LinkedList;
@@ -38,12 +39,13 @@ public class PoliceDept extends Portal {
     private void tryToSendPoliceman(Arrestable target) {
         policemanIsOut = true;
         if (canSpawn()) {
-            spawn(new Policeman(field, coord, target, new PolicemanReportInterface() {
+            ReturnReportInterface onReturn = new ReturnReportInterface() {
                 @Override
                 public void report() {
                     policemanIsOut = false;
                 }
-            }));
+            };
+            spawn(new Policeman(field, coord, onReturn, target));
         }
     }
 

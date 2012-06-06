@@ -1,80 +1,44 @@
 package ru.spbau.kononenko.drunkgame.police.policeman;
 
-import ru.spbau.kononenko.drunkgame.common_actors.Actor;
-import ru.spbau.kononenko.drunkgame.common_algorithms.pathfinders.BFSPathFinder;
+import ru.spbau.kononenko.drunkgame.common_actors.ReturnReportInterface;
+import ru.spbau.kononenko.drunkgame.common_actors.ThereAndBackAgain;
+import ru.spbau.kononenko.drunkgame.common_algorithms.filters.FilterInterface;
 import ru.spbau.kononenko.drunkgame.common_algorithms.filters.OneOfFilter;
-import ru.spbau.kononenko.drunkgame.common_algorithms.pathfinders.PathFinder;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
 import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;
 import ru.spbau.kononenko.drunkgame.field.objects.FieldObjectProperty;
 import ru.spbau.kononenko.drunkgame.police.arrestable.Arrestable;
-import ru.spbau.kononenko.drunkgame.police.arrestable.ArrestableNotFoundException;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+public class Policeman extends ThereAndBackAgain {
+    private Arrestable victim;
+    private FilterInterface<Coord> isVictimLocation = new FilterInterface<Coord>() {
+        @Override
+        public boolean accept(Coord coord) {
+            return getField().getObject(coord) == victim;
+        }
+    };
+    private FilterInterface<FieldObject> ignoreFilter 
+            = new OneOfFilter<FieldObject>(null, this, victim);
 
-public class Policeman extends Actor {
-    private enum State {
-        CHASING, RETURNING
-    }
-
-    private final PathFinder pathFinder = new BFSPathFinder();
-    private final Arrestable victim;
-    private final PolicemanReportInterface reportInterface;
-    private final Coord home;
-
-    private Coord target;
-    private State state;
-    Queue<Coord> path;
-
-    public Policeman(Field field, Coord coord, Arrestable victim, PolicemanReportInterface reportInterface) {
-        super(field, coord);
-
+    public Policeman(Field field, Coord coord, ReturnReportInterface onReturn, Arrestable victim) {
+        super(field, coord, onReturn);
         this.victim = victim;
-        this.reportInterface = reportInterface;
-
-        home = coord;
-        startChase();
     }
 
     @Override
-    public void update() {
-        // No path. Search again.
-        if (path == null) {
-            updatePath();
-            return;
-        }
+    protected Coord chase() {
+        Coord next = getPathFinder().getNext(getField(), getCoord(), isVictimLocation, ignoreFilter);
+        if (next == null)
+            return null;
         
-        if (path.isEmpty()) {
-            if (state == State.RETURNING) {
-                report();
-            } else {
-                // Came to the location but no one is found. Search again.
-                updatePath();
-            }
-            return;
-        }
-
-        Coord next = path.remove();
-
-        if (state == State.CHASING && next.equals(victim.getCoord()))
-        {
-            checkVictimConsistency();
+        if (next.equals(victim.getCoord())) {
             victim.arrest(this);
-            startReturn();
-            return;
+            changeState(State.RETURNING);
+            return null;
         }
 
-        if (getField().getObject(next) != null)
-        {
-            // Path blocked, invalidate it
-            path = null;
-            return;
-        }
-
-        moveTo(next);
+        return next;
     }
 
     @Override
@@ -90,41 +54,5 @@ public class Policeman extends Actor {
     @Override
     public char getChar() {
         return '!';
-    }
-    
-    private void report() {
-        reportInterface.report();
-        kill();
-        
-    }
-    private void startChase() {
-        state = State.CHASING;
-        target = victim.getCoord();
-        updatePath();
-    }
-
-    private void startReturn() {
-        state = State.RETURNING;
-        target = home;
-        updatePath();
-    }
-
-    private void updatePath() {
-        OneOfFilter<FieldObject> ignore = new OneOfFilter<FieldObject>();
-        ignore.add(null);
-        ignore.add(this);
-        if (state == State.CHASING) {
-            ignore.add(getField().getObject(target));
-            
-            checkVictimConsistency();
-        }
-
-        List<Coord> list = pathFinder.getPath(getField(), getCoord(), target, ignore);
-        path = (list == null) ? null : new LinkedList<Coord>(list);
-    }
-    
-    private void checkVictimConsistency() {
-        if (getField().getObject(victim.getCoord()) != victim)
-            throw new ArrestableNotFoundException("arrestable not found on reported coord: " + victim.getCoord());
     }
 }
