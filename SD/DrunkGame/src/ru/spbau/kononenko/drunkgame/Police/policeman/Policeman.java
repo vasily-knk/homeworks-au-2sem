@@ -16,14 +16,19 @@ public class Policeman extends ThereAndBackAgain {
         @Override
         public boolean accept(Coord coord) {
             return getField().getObject(coord) == victim;
+            /*boolean res = coord.equals(victim.getCoord());
+            if (res)
+                return true;
+            else
+                return false;*/
         }
     };
-    private FilterInterface<FieldObject> ignoreFilter 
-            = new OneOfFilter<FieldObject>(null, this, victim);
+    private FilterInterface<FieldObject> ignoreFilter;
 
     public Policeman(Field field, Coord coord, ReturnReportInterface onReturn, Arrestable victim) {
         super(field, coord, onReturn);
         this.victim = victim;
+        this.ignoreFilter = new OneOfFilter<FieldObject>(this, null, victim);
     }
 
     @Override

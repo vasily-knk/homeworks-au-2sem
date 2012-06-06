@@ -5,6 +5,7 @@ import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
 
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public abstract class BFS {
@@ -34,16 +35,28 @@ public abstract class BFS {
     }
 
     public void run() {
+
         while (!queue.isEmpty()) {
             Record r = queue.remove();
+            while (visited.contains(r.coord)) {
+                if (queue.isEmpty())
+                    break;
+                r = queue.remove();
+            }
+
+            
             CheckState state = check(r);
+
             if (state == CheckState.STOP)
                 return;
+
             
             if (state == CheckState.CONTINUE) {
-                for (Coord adj : field.getAdjacent(r.coord)) {
-                    if (!visited.contains(adj))
+                List<Coord> adjs = field.getAdjacent(r.coord);
+                for (Coord adj : adjs) {
+                    if (!visited.contains(adj)) {
                         queue.add(new Record(adj, r.coord, r.depth + 1));
+                    }
                 }
             }
             visited.add(r.coord);

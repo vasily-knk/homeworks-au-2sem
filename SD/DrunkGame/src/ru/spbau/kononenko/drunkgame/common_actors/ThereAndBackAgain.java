@@ -18,7 +18,8 @@ public abstract class ThereAndBackAgain extends Actor {
     private ReturnReportInterface onReturn;
     private State state;
     private PathFinder pathFinder;
-    private FilterInterface<Coord> isHomeFilter = new OneOfFilter<Coord>(home);
+    private FilterInterface<Coord> isHomeFilter;
+
     private FilterInterface<FieldObject> ignoreFilter = new OneOfFilter<FieldObject>(null, this);
     
     public ThereAndBackAgain(Field field, Coord coord, ReturnReportInterface onReturn) {
@@ -26,6 +27,7 @@ public abstract class ThereAndBackAgain extends Actor {
         this.home = coord;
         this.onReturn = onReturn;
         this.pathFinder = new BFSPathFinder();
+        isHomeFilter = new OneOfFilter<Coord>(home);
     }
 
     public ThereAndBackAgain(Field field, Coord coord, ReturnReportInterface onReturn, PathFinder pathFinder) {
@@ -33,6 +35,7 @@ public abstract class ThereAndBackAgain extends Actor {
         this.home = coord;
         this.onReturn = onReturn;
         this.pathFinder = pathFinder;
+        isHomeFilter = new OneOfFilter<Coord>(home);
     }
     
     @Override

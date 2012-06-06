@@ -1,5 +1,6 @@
 package ru.spbau.kononenko.drunkgame.game;
 
+import ru.spbau.kononenko.drunkgame.beggar.BottlesRC;
 import ru.spbau.kononenko.drunkgame.common_actors.DynamicObject;
 import ru.spbau.kononenko.drunkgame.drunks.Bar;
 import ru.spbau.kononenko.drunkgame.drunks.Pillar;
@@ -30,8 +31,8 @@ public class Game implements DynamicControl {
         Streetlight streetlight = new Streetlight(field, new Coord(10, 3), 3);
         dept.addSearcher(streetlight);
 
-        //Drunk drunk = new Drunk(field, new Coord(9, 3));
-        //drunk.fallAsleep();
+        BottlesRC rc = new BottlesRC(field, new Coord(4, 14), this, 40);
+        objectsList.add(rc);
     }
 
     @Override
