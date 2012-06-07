@@ -1,9 +1,9 @@
 package ru.spbau.kononenko.drunkgame.police.policeman;
 
-import ru.spbau.kononenko.drunkgame.common_actors.ReturnReportInterface;
-import ru.spbau.kononenko.drunkgame.common_actors.ThereAndBackAgain;
-import ru.spbau.kononenko.drunkgame.common_algorithms.filters.FilterInterface;
-import ru.spbau.kononenko.drunkgame.common_algorithms.filters.OneOfFilter;
+import ru.spbau.kononenko.drunkgame.common.actors.ReturnReportInterface;
+import ru.spbau.kononenko.drunkgame.common.actors.ThereAndBackAgain;
+import ru.spbau.kononenko.drunkgame.common.algorithms.filters.FilterInterface;
+import ru.spbau.kononenko.drunkgame.common.algorithms.filters.OneOfFilter;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
 import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;
@@ -16,11 +16,6 @@ public class Policeman extends ThereAndBackAgain {
         @Override
         public boolean accept(Coord coord) {
             return getField().getObject(coord) == victim;
-            /*boolean res = coord.equals(victim.getCoord());
-            if (res)
-                return true;
-            else
-                return false;*/
         }
     };
     private FilterInterface<FieldObject> ignoreFilter;

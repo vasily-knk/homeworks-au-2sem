@@ -1,12 +1,12 @@
 package ru.spbau.kononenko.drunkgame.game;
 
 import ru.spbau.kononenko.drunkgame.beggar.BottlesRC;
-import ru.spbau.kononenko.drunkgame.common_actors.DynamicObject;
+import ru.spbau.kononenko.drunkgame.common.actors.DynamicObject;
 import ru.spbau.kononenko.drunkgame.drunks.Bar;
 import ru.spbau.kononenko.drunkgame.drunks.Pillar;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
-import ru.spbau.kononenko.drunkgame.field.field_itself.RectField;
+import ru.spbau.kononenko.drunkgame.field.field_itself.HexField;
 import ru.spbau.kononenko.drunkgame.police.PoliceDept;
 import ru.spbau.kononenko.drunkgame.police.reporters.Streetlight;
 
@@ -21,7 +21,7 @@ public class Game implements DynamicControl {
     private int turn = 0;
 
     public Game () {
-        field = new RectField(15, 15);
+        field = new HexField(15, 15);
         objectsList.add(new Bar(field, new Coord(9, 0), this, 20));
         field.setObject(new Coord(7, 7), new Pillar());
         

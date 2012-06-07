@@ -1,10 +1,9 @@
-package ru.spbau.kononenko.drunkgame.common_actors;
+package ru.spbau.kononenko.drunkgame.common.actors;
 
-import ru.spbau.kononenko.drunkgame.common_algorithms.filters.FilterInterface;
-import ru.spbau.kononenko.drunkgame.common_algorithms.filters.OneOfFilter;
-import ru.spbau.kononenko.drunkgame.common_algorithms.pathfinders.BFSPathFinder;
-import ru.spbau.kononenko.drunkgame.common_algorithms.pathfinders.OldPathFinder;
-import ru.spbau.kononenko.drunkgame.common_algorithms.pathfinders.PathFinder;
+import ru.spbau.kononenko.drunkgame.common.algorithms.filters.FilterInterface;
+import ru.spbau.kononenko.drunkgame.common.algorithms.filters.OneOfFilter;
+import ru.spbau.kononenko.drunkgame.common.algorithms.pathfinders.BFSPathFinder;
+import ru.spbau.kononenko.drunkgame.common.algorithms.pathfinders.PathFinder;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
 import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;

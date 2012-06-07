@@ -1,8 +1,8 @@
 package ru.spbau.kononenko.drunkgame.beggar;
 
-import ru.spbau.kononenko.drunkgame.common_actors.ReturnReportInterface;
-import ru.spbau.kononenko.drunkgame.common_actors.ThereAndBackAgain;
-import ru.spbau.kononenko.drunkgame.common_algorithms.filters.FilterInterface;
+import ru.spbau.kononenko.drunkgame.common.actors.ReturnReportInterface;
+import ru.spbau.kononenko.drunkgame.common.actors.ThereAndBackAgain;
+import ru.spbau.kononenko.drunkgame.common.algorithms.filters.FilterInterface;
 import ru.spbau.kononenko.drunkgame.drunks.Bottle;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Field;

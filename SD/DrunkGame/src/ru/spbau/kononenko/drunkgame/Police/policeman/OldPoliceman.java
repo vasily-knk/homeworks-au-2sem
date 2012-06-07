@@ -1,19 +1,15 @@
 package ru.spbau.kononenko.drunkgame.police.policeman;
 
-import ru.spbau.kononenko.drunkgame.common_actors.Actor;
-import ru.spbau.kononenko.drunkgame.common_actors.ReturnReportInterface;
-import ru.spbau.kononenko.drunkgame.common_algorithms.pathfinders.BFSOldPathFinder;
-import ru.spbau.kononenko.drunkgame.common_algorithms.filters.OneOfFilter;
-import ru.spbau.kononenko.drunkgame.common_algorithms.pathfinders.OldPathFinder;
+import ru.spbau.kononenko.drunkgame.common.actors.Actor;
+import ru.spbau.kononenko.drunkgame.common.actors.ReturnReportInterface;
+import ru.spbau.kononenko.drunkgame.common.algorithms.pathfinders.BFSOldPathFinder;
+import ru.spbau.kononenko.drunkgame.common.algorithms.pathfinders.OldPathFinder;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
-import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;
 import ru.spbau.kononenko.drunkgame.field.objects.FieldObjectProperty;
 import ru.spbau.kononenko.drunkgame.police.arrestable.Arrestable;
 import ru.spbau.kononenko.drunkgame.police.arrestable.ArrestableNotFoundException;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class OldPoliceman extends Actor {

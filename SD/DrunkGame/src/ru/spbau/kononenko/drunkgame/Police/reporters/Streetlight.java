@@ -1,7 +1,7 @@
 package ru.spbau.kononenko.drunkgame.police.reporters;
 
 import ru.spbau.kononenko.drunkgame.drunks.Drunk;
-import ru.spbau.kononenko.drunkgame.common_algorithms.BFS;
+import ru.spbau.kononenko.drunkgame.common.algorithms.BFS;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
 import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;

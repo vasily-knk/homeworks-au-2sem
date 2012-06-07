@@ -1,11 +1,10 @@
 package ru.spbau.kononenko.drunkgame.beggar;
 
-import ru.spbau.kononenko.drunkgame.common_actors.Portal;
-import ru.spbau.kononenko.drunkgame.common_actors.ReturnReportInterface;
+import ru.spbau.kononenko.drunkgame.common.actors.Portal;
+import ru.spbau.kononenko.drunkgame.common.actors.ReturnReportInterface;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
 import ru.spbau.kononenko.drunkgame.game.DynamicControl;
-import ru.spbau.kononenko.drunkgame.police.policeman.Policeman;
 
 public class BottlesRC extends Portal {
     private int respawnTime;

@@ -1,12 +1,11 @@
 package ru.spbau.kononenko.drunkgame.drunks;
 
-import ru.spbau.kononenko.drunkgame.common_actors.Actor;
+import ru.spbau.kononenko.drunkgame.common.actors.Actor;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
 import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;
 import ru.spbau.kononenko.drunkgame.field.objects.FieldObjectProperty;
 import ru.spbau.kononenko.drunkgame.police.arrestable.Arrestable;
-import ru.spbau.kononenko.drunkgame.police.policeman.OldPoliceman;
 import ru.spbau.kononenko.drunkgame.police.policeman.Policeman;
 
 import java.util.List;

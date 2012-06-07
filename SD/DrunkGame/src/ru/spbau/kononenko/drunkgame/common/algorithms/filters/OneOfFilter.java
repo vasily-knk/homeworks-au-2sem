@@ -1,6 +1,4 @@
-package ru.spbau.kononenko.drunkgame.common_algorithms.filters;
-
-import ru.spbau.kononenko.drunkgame.common_algorithms.filters.FilterInterface;
+package ru.spbau.kononenko.drunkgame.common.algorithms.filters;
 
 import java.util.Collections;
 import java.util.HashSet;

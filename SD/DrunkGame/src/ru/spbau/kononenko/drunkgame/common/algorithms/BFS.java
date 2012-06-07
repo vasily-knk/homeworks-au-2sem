@@ -1,4 +1,4 @@
-package ru.spbau.kononenko.drunkgame.common_algorithms;
+package ru.spbau.kononenko.drunkgame.common.algorithms;
 
 import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
 import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;

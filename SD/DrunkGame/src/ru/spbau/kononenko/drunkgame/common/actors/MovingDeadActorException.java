@@ -1,4 +1,4 @@
-package ru.spbau.kononenko.drunkgame.common_actors;
+package ru.spbau.kononenko.drunkgame.common.actors;
 
 public class MovingDeadActorException extends RuntimeException {
     public MovingDeadActorException(Actor actor) {
