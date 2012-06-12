@@ -1,11 +1,11 @@
 module Tree
-    ( Tree
+    ( Tree(Leaf, Branch)
     , height
     , avg
     , width
     ) where
 
-data Tree a b = Branch (Tree a b) a (Tree a b) | Leaf b
+data Tree a b = Branch (Tree a b) a (Tree a b) | Leaf b deriving (Show)
 
 -- Возвращает высоту дерева
 height :: Tree a b -> Int

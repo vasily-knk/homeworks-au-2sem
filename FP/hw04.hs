@@ -45,18 +45,18 @@ minp p = helper p 0	where
 
 -- 5. 
 -- a) Написать функцию, возвращающую количество цифр числа.
+        
 ndig :: Integer -> Integer
-ndig n = helper 0 n where
-	helper acc n 
-		| n == 0 = acc
-		| otherwise = helper (acc + 1) (div n 10) 
+ndig n
+    | n == 0 = 0
+    | otherwise = 1 + ndig (div n 10)
+        
 
 -- b) Написать функцию, возвращающую сумму цифр числа. 
 sumdig :: Integer -> Integer
-sumdig n = helper 0 n where 
-	helper acc n 
-		| n == 0 = acc
-		| otherwise = helper (acc + (mod n 10)) (div n 10) 
+sumdig n
+    | n == 0 = 0
+    | otherwise = (mod n 10) + sumdig (div n 10)
 
 -- 6. Реализовать функцию gcd при помощи алгоритма Евклида. 
 
@@ -67,11 +67,11 @@ gcd' a b
 
 -- 7. Реализовать функцию, находящую значение определенного интеграла на отрезке методом трапеций. 
 
-intl :: (Float -> Float) -> (Float -> (Float -> Float))
-intl f a b = helper 0 f a b where 
-	helper acc f a b 
-		| a < b = helper (acc + trap f a delta) f (a + delta) b 
-		| otherwise = acc where
-			trap f a delta' = ((f a) + (f (a + delta'))) / 2 * delta';
-			delta = 0.0001
-			
+intl :: (Float -> Float) -> Float -> Float -> Float
+intl f a b 
+    | a < b = (intl f (a + delta) b) + (trap f a delta)
+    | otherwise = 0 
+    where
+        delta = 0.0001;
+        trap f a delta' = ((f a) + (f (a + delta'))) / 2 * delta'
+
