@@ -5,7 +5,7 @@ module Tree
     , width
     ) where
 
-data Tree a b = Branch (Tree a b) a (Tree a b) | Leaf b deriving (Show)
+data Tree a b = Branch (Tree a b) a (Tree a b) | Leaf b
 
 -- Возвращает высоту дерева
 height :: Tree a b -> Int

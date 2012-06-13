@@ -1,6 +1,6 @@
-package ru.spbau.kononenko.drunkgame.field.field_itself;
+package ru.spbau.kononenko.drunkgame.common.field.field_itself;
 
-import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;
+import ru.spbau.kononenko.drunkgame.common.field.objects.FieldObject;
 
 public abstract class Field implements FieldGeometry {
     public abstract FieldObject getObject(Coord coord);

@@ -1,4 +1,4 @@
-package ru.spbau.kononenko.drunkgame.field.objects;
+package ru.spbau.kononenko.drunkgame.common.field.objects;
 
 public class MovingNotAllowedException extends RuntimeException {
     public MovingNotAllowedException(String message) {

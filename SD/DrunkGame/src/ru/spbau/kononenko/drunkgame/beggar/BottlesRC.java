@@ -2,8 +2,8 @@ package ru.spbau.kononenko.drunkgame.beggar;
 
 import ru.spbau.kononenko.drunkgame.common.actors.Portal;
 import ru.spbau.kononenko.drunkgame.common.actors.ReturnReportInterface;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Coord;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Field;
 import ru.spbau.kononenko.drunkgame.game.DynamicControl;
 
 public class BottlesRC extends Portal {

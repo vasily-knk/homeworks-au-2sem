@@ -1,7 +1,7 @@
 package ru.spbau.kononenko.drunkgame.common.algorithms;
 
-import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Field;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Coord;
 
 import java.util.HashSet;
 import java.util.LinkedList;

@@ -1,4 +1,4 @@
-package ru.spbau.kononenko.drunkgame.field.field_itself;
+package ru.spbau.kononenko.drunkgame.common.field.field_itself;
 
 import java.util.List;
 

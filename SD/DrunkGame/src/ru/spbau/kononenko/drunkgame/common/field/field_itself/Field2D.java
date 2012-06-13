@@ -1,8 +1,9 @@
-package ru.spbau.kononenko.drunkgame.field.field_itself;
+package ru.spbau.kononenko.drunkgame.common.field.field_itself;
 
-import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;
+import ru.spbau.kononenko.drunkgame.common.field.objects.FieldObject;
 
 public abstract class Field2D extends Field {
+
     protected final int width, height;
     private final FieldObject[][] data;
 
@@ -45,6 +46,14 @@ public abstract class Field2D extends Field {
     public void assertInside(Coord coord) {
         if(!isInside(coord))
             throw new FieldOutOfRangeException(coord.toString());
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
 }

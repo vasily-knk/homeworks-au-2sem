@@ -4,9 +4,9 @@ import ru.spbau.kononenko.drunkgame.beggar.BottlesRC;
 import ru.spbau.kononenko.drunkgame.common.actors.DynamicObject;
 import ru.spbau.kononenko.drunkgame.drunks.Bar;
 import ru.spbau.kononenko.drunkgame.drunks.Pillar;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
-import ru.spbau.kononenko.drunkgame.field.field_itself.HexField;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Coord;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Field;
+import ru.spbau.kononenko.drunkgame.hex_field.HexField;
 import ru.spbau.kononenko.drunkgame.police.PoliceDept;
 import ru.spbau.kononenko.drunkgame.police.reporters.Streetlight;
 

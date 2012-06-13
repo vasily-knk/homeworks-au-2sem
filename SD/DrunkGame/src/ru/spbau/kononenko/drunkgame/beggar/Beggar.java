@@ -4,10 +4,10 @@ import ru.spbau.kononenko.drunkgame.common.actors.ReturnReportInterface;
 import ru.spbau.kononenko.drunkgame.common.actors.ThereAndBackAgain;
 import ru.spbau.kononenko.drunkgame.common.algorithms.filters.FilterInterface;
 import ru.spbau.kononenko.drunkgame.drunks.Bottle;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
-import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;
-import ru.spbau.kononenko.drunkgame.field.objects.FieldObjectProperty;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Coord;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Field;
+import ru.spbau.kononenko.drunkgame.common.field.objects.FieldObject;
+import ru.spbau.kononenko.drunkgame.common.field.objects.FieldObjectProperty;
 
 public class Beggar extends ThereAndBackAgain {
     private FilterInterface<FieldObject> ignoreFilter = new FilterInterface<FieldObject>() {

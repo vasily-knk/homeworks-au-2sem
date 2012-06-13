@@ -1,10 +1,10 @@
 package ru.spbau.kononenko.drunkgame.drunks;
 
 import ru.spbau.kononenko.drunkgame.common.actors.Actor;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
-import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;
-import ru.spbau.kononenko.drunkgame.field.objects.FieldObjectProperty;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Coord;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Field;
+import ru.spbau.kononenko.drunkgame.common.field.objects.FieldObject;
+import ru.spbau.kononenko.drunkgame.common.field.objects.FieldObjectProperty;
 import ru.spbau.kononenko.drunkgame.police.arrestable.Arrestable;
 import ru.spbau.kononenko.drunkgame.police.policeman.Policeman;
 
@@ -14,7 +14,7 @@ import java.util.Random;
 public class Drunk extends Actor implements Arrestable {
     private static final int BOTTLE_DROP_PROBABILITY = 30;
     
-    private final Random random = new Random();
+    private Random random = new Random();
     private boolean isFrozen = false;
     private boolean isSleeping = false;
     private boolean hasBottle = true;
@@ -47,6 +47,10 @@ public class Drunk extends Actor implements Arrestable {
     @Override
     public void update() {
         List<Coord> directions = getField().getAdjacent(getCoord());
+        
+        if (directions.isEmpty())
+            return;
+        
         int index = random.nextInt(directions.size());
         Coord dir = directions.get(index);
 
@@ -98,5 +102,9 @@ public class Drunk extends Actor implements Arrestable {
 
     public void fallAsleep() {
         isSleeping = true;
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
     }
 }

@@ -1,6 +1,8 @@
-package ru.spbau.kononenko.drunkgame.field.field_itself;
+package ru.spbau.kononenko.drunkgame.hex_field;
 
-import ru.spbau.kononenko.drunkgame.field.objects.FieldObject;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Coord;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Field2D;
+import ru.spbau.kononenko.drunkgame.common.field.objects.FieldObject;
 
 import java.util.ArrayList;
 import java.util.List;

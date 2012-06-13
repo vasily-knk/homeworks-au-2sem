@@ -1,7 +1,7 @@
 package ru.spbau.kononenko.drunkgame.drunks;
 
-import ru.spbau.kononenko.drunkgame.field.objects.FieldObjectProperty;
-import ru.spbau.kononenko.drunkgame.field.objects.StaticFieldObject;
+import ru.spbau.kononenko.drunkgame.common.field.objects.FieldObjectProperty;
+import ru.spbau.kononenko.drunkgame.common.field.objects.StaticFieldObject;
 
 public class Pillar extends StaticFieldObject {
 

@@ -4,9 +4,9 @@ import ru.spbau.kononenko.drunkgame.common.actors.Actor;
 import ru.spbau.kononenko.drunkgame.common.actors.ReturnReportInterface;
 import ru.spbau.kononenko.drunkgame.common.algorithms.pathfinders.BFSOldPathFinder;
 import ru.spbau.kononenko.drunkgame.common.algorithms.pathfinders.OldPathFinder;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
-import ru.spbau.kononenko.drunkgame.field.objects.FieldObjectProperty;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Coord;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Field;
+import ru.spbau.kononenko.drunkgame.common.field.objects.FieldObjectProperty;
 import ru.spbau.kononenko.drunkgame.police.arrestable.Arrestable;
 import ru.spbau.kononenko.drunkgame.police.arrestable.ArrestableNotFoundException;
 

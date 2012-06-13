@@ -1,8 +1,8 @@
-package ru.spbau.kononenko.drunkgame.field.objects;
+package ru.spbau.kononenko.drunkgame.common.field.objects;
 
 import ru.spbau.kononenko.drunkgame.common.actors.SelfAware;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Coord;
-import ru.spbau.kononenko.drunkgame.field.field_itself.Field;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Coord;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.Field;
 
 public abstract class SelfAwareFieldObject implements SelfAware, FieldObject {
     private final Field field;
