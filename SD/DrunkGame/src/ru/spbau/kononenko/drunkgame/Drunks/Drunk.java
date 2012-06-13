@@ -70,7 +70,7 @@ public class Drunk extends Actor implements Arrestable {
         return (!isFrozen && !isSleeping);
     }
 
-    private void freeze() {
+    public void freeze() {
         isFrozen = true;
     }
 

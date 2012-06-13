@@ -2,8 +2,11 @@ package ru.spbau.kononenko.drunkgame.drunks;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+import ru.spbau.kononenko.drunkgame.common.actors.MovingDeadActorException;
 import ru.spbau.kononenko.drunkgame.common.field.field_itself.Coord;
 import ru.spbau.kononenko.drunkgame.common.field.field_itself.Field;
+import ru.spbau.kononenko.drunkgame.common.field.field_itself.FieldOccupiedException;
 import ru.spbau.kononenko.drunkgame.common.field.objects.FieldObject;
 import ru.spbau.kononenko.drunkgame.rect_field.RectField;
 
@@ -14,9 +17,7 @@ import java.util.Random;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class DrunkTest {
     private Field field;
@@ -72,6 +73,8 @@ public class DrunkTest {
     public void singleStep() {
         drunk.update();
         assertEquals(drunk.getCoord(), adjCoord);
+        assertEquals(field.getObject(adjCoord), drunk);
+        Mockito.verify(field).moveObject(startCoord, adjCoord);
     }
     
     @Test
@@ -79,6 +82,12 @@ public class DrunkTest {
         new Drunk(field, adjCoord);
         drunk.update();
         assertEquals(drunk.getCoord(), startCoord);
+    }
+
+    @Test (expected = MovingDeadActorException.class)
+    public void walkingDead() {
+        drunk.kill();
+        drunk.moveTo(adjCoord);
     }
 
 }

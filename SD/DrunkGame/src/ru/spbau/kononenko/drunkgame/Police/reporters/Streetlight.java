@@ -31,7 +31,7 @@ public class Streetlight extends SelfAwareFieldObject implements ArrestableRepor
                     return CheckState.STOP;
                 }
                     
-                if (r.depth == radius)
+                if (r.depth >= radius)
                     return CheckState.CUT;
                 return CheckState.CONTINUE;
             }
