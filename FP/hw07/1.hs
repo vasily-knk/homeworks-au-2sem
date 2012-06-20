@@ -12,10 +12,17 @@ instance (Eq a, Eq b) => Eq (Tree a b) where
     (==) a b = b == a
 
 instance (Show a, Show b) => Show (Tree a b) where
-    show (Branch l a r) = "<" ++ show l ++ "{" ++ show a ++ "}" ++ show r ++ ">"
-    show (Leaf a) = show a
+    showsPrec _ (Leaf a) = shows a
+    showsPrec _ (Branch l a r) = ('<':) . shows l . ('{':) . shows a . ('}':) . shows r . ('>':)
+
     
+instance (Read a, Read b) => Read (Tree a b) where
+    readsPrec _ ('<':xs) = 
+    
+-- ???
 instance Functor (Tree a) where
-    fmap f (Leaf a) = Leaf $ f a
-    fmap f (Branch l a r) = Branch (fmap f l) (fmap f a) (fmap f r)
+    fmap f (Leaf v) = Leaf $ f v
+    fmap f (Branch l v r) = Branch (fmap f l) v (fmap f r)
     
+tree = b (b (b l l) (b l (b l l))) (b l (b l (b l l)))
+  where l = Leaf 500; b l r = Branch l 300 r
