@@ -10,6 +10,11 @@ using std::vector;
 struct my_struct 
 {
     int arr[100];
+
+    void *operator new(size_t size)
+    {
+
+    }
 };
 
 const size_t Size = sizeof(my_struct);
@@ -20,17 +25,18 @@ public:
     mem_manager(size_t chunk_size);
     ~mem_manager();
 public:
-    void *alloc();
-    void free (void* ptr);
-
-private:
-    void alloc_chunk(size_t size);
-
     struct record
     {
         mem_manager *man;
         record *prev, *next;
     };
+
+    record *alloc();
+    void free (record *r);
+
+private:
+    void alloc_chunk(size_t size);
+
 
 private:
     const size_t CHUNK_SIZE;
@@ -86,7 +92,7 @@ void mem_manager::alloc_chunk(size_t size)
     chunks_.push_back(pchunk);
 }
 
-void *mem_manager::alloc()
+mem_manager::record *mem_manager::alloc()
 {
     if (free_ == NULL)
         alloc_chunk (CHUNK_SIZE);
@@ -110,13 +116,27 @@ void *mem_manager::alloc()
     r->prev = NULL;
     occupied_ = r;
 
-    return reinterpret_cast<void*>(r + 1);
+    return r;
 }
 
-void mem_manager::free(void* ptr)
+void mem_manager::free(record* r)
 {
-    record *r = reinterpret_cast<record*>(ptr) - 1;
+    if (r->prev != NULL)    
+        r->prev->next = r->next;
+    
+    if (r->next != NULL)
+        r->next->prev = r->prev;
+    
+    r->prev = NULL;
+    r->next = free_;
+    
+    if (free_ != NULL)
+    {
+        assert (free_->prev == NULL);
+        free_->prev = r;
+    }
 
+    free_ = r;
 }
 
 
