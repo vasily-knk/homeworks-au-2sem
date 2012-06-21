@@ -6,7 +6,7 @@ k x y = x
 s x y z = x z (y z) 
 -- Реализовать b через s и k.. 
 
-b' x y z = s (k x) y z
+b' x = s (k x)
 
 
 -- 2. 

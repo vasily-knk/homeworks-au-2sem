@@ -15,9 +15,15 @@ instance (Show a, Show b) => Show (Tree a b) where
     showsPrec _ (Leaf a) = shows a
     showsPrec _ (Branch l a r) = ('<':) . shows l . ('{':) . shows a . ('}':) . shows r . ('>':)
 
+
+readsTree ('<':buf) = [(Branch l v r, rightRest) | 
+        (left,  '{':leftRest)  <- readsTree buf,
+        (value, '}':valueRest) <- reads leftRest,
+        (right, '>':rightRest) <- readsTree valueRest]
+readsTree buf = [(Leaf value, rest) | (value, rest) <- reads(buf)]
     
 instance (Read a, Read b) => Read (Tree a b) where
-    readsPrec _ ('<':xs) = 
+        readsPrec _ buf = readsTree buf
     
 -- ???
 instance Functor (Tree a) where
