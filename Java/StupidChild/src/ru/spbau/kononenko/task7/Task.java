@@ -1,3 +1,4 @@
+package ru.spbau.kononenko.task7;
 
 /**
  * The number incrementation task

@@ -23,7 +23,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="mem_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

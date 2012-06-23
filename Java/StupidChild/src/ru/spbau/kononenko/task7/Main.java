@@ -1,3 +1,7 @@
+package ru.spbau.kononenko.task7;
+
+import ru.spbau.kononenko.task7.DistributedIncrementor;
+
 /**
  * Main class
  * @author Vasily Kononenko
