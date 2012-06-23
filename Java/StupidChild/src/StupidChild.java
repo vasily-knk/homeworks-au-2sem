@@ -1,10 +1,23 @@
 import java.util.Random;
 
+/**
+ * Class which generates numbers and calls external incremetor
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+ */
 public class StupidChild implements Runnable {
     private int id;
     private int[] array;
     private DistributedIncrementor incrementor;
 
+    /**
+     * Class constructor
+     * @param id child id
+     * @param arraySize total numbers to generate
+     * @param min minimum number
+     * @param max maximum number
+     * @param incrementor external incrementor to use
+     */
     public StupidChild(int id, int arraySize, int min, int max, DistributedIncrementor incrementor) {
         this.id = id;
         array = new int[arraySize];
@@ -16,26 +29,18 @@ public class StupidChild implements Runnable {
         this.incrementor = incrementor;
     }
 
+    @Override
     public void run() {
-        System.out.println("StupidChild " + id + " started");
-        boolean ok = true;
-
         for (int i : array) {
-            //if (interrupted = Thread.interrupted())
-                //break;
-
             int result;
             try {
-                //Thread.sleep(10);
+                Thread.sleep(10);
                 result = incrementor.increment(i);
             } catch (InterruptedException e) {
-                ok = false;
                 break;
             }
 
-            //Thread.yield();
             System.out.println("" + id + ": " + i + " changed to " + result);
         }
-        System.out.println("StupidChild " + id + (ok ? " finished" : " interrupted"));
     }
 }
