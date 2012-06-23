@@ -1,9 +1,27 @@
 package ru.spbau.kononenko.philosophers;
 
+import java.util.Random;
+
+/**
+ * Philosopher who can eat and sleep
+ * @author Vasily Kononenko
+ * @version %I%, %G%
+*/
 public class Philosopher implements Runnable{
     private int id;
     private final Fork left, right;
-    
+    private Random random = new Random();
+
+    private static final int MAX_SLEEP_TIME = 500;
+    private static final int MAX_EAT_TIME = 500;
+
+
+    /**
+     *
+     * @param id philosopher id
+     * @param left the fork to the left
+     * @param right the fork to the right
+     */
     public Philosopher(int id, Fork left, Fork right) {
         this.id = id;
         this.left = left;
@@ -15,26 +33,40 @@ public class Philosopher implements Runnable{
         while (!Thread.interrupted()) {
             boolean leftTaken = takeFork(left);
             boolean rightTaken = leftTaken && takeFork(right);
-            
-            if (leftTaken && rightTaken)
-                eat();
-            else
+
+            try {
+                if (leftTaken && rightTaken)
+                    eat();
+            } catch (InterruptedException e) {
+                break;
+            } finally {
+                if (rightTaken)
+                    putFork(right);
+                if (leftTaken)
+                    putFork(left);
+            }
+
+
+            try {
                 sleep();
-            
-            if (rightTaken)
-                putFork(right);
-            if (leftTaken)
-                putFork(left);
-            
+            } catch (InterruptedException e) {
+                break;
+            }
         }
     }
 
-    private void sleep() {
-        System.out.println(getName() + " sleeps");
+
+
+    private void sleep() throws InterruptedException {
+        System.out.println(getName() + " starts sleeping");
+        Thread.sleep(random.nextInt(MAX_SLEEP_TIME));
+        System.out.println(getName() + " finishes sleeping");
     }
 
-    private void eat() {
-        System.out.println(getName() + " eats");
+    private void eat() throws InterruptedException {
+        System.out.println(getName() + " starts eating");
+        Thread.sleep(random.nextInt(MAX_EAT_TIME));
+        System.out.println(getName() + " finishes eating");
     }
 
     private boolean takeFork(Fork fork) {
@@ -54,7 +86,7 @@ public class Philosopher implements Runnable{
             fork.put();
         }
 
-        System.out.println(getName() + "puts the " + getForkName(fork) + " fork.");
+        System.out.println(getName() + " puts the " + getForkName(fork) + " fork.");
     }
     
     private String getForkName(Fork fork) {
