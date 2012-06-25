@@ -23,7 +23,6 @@ public class LoginWindow extends JFrame {
         Box box = Box.createHorizontalBox();
         JLabel label = new JLabel("", new ImageIcon("log.png"), SwingConstants.RIGHT);
         box.add(label);
-        box.add(Box.createHorizontalStrut(4));
         JPanel inputs = new JPanel();
 
         inputs.setLayout(new GridLayout(2, 2, 4, 4));
@@ -99,6 +98,9 @@ public class LoginWindow extends JFrame {
             }
             enableButtons();
             JOptionPane.showMessageDialog(LoginWindow.this, "Hello!");
+
+            JFrame editorWindow = new EditorWindow();
+            editorWindow.setVisible(true);
             //LoginWindow.this.setVisible(false);
             /*editorWindow.setLocation(400, 400);
             editorWindow.setTitle("Hello, " + loginText.getText());
