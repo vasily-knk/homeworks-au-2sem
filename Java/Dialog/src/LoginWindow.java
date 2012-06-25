@@ -9,6 +9,11 @@ public class LoginWindow extends JFrame {
     private TextField passwordText;
     private JProgressBar pBar;
 
+    private JButton loginButton;
+    private JButton registerButton;
+    private JButton clearButton;
+
+
 
     public LoginWindow() {
         super("Login");
@@ -37,30 +42,67 @@ public class LoginWindow extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(2, 1));
         JPanel flowPanel = new JPanel(new FlowLayout());
-        JButton registerButton = new JButton("Register");
-        JButton loginButton = new JButton("Login");
-        JButton cancelButton = new JButton("Clear");
+        registerButton = new JButton("Register");
+        loginButton = new JButton("Login");
+        clearButton = new JButton("Clear");
         pBar = new JProgressBar();
 
         flowPanel.add(registerButton);
         flowPanel.add(loginButton);
-        flowPanel.add(cancelButton);
+        flowPanel.add(clearButton);
         panel.add(flowPanel);
         panel.add(pBar);
 
         getContentPane().add(panel, BorderLayout.SOUTH);
         //getContentPane().add(panel);
         pack();
-        /*registerButton.addActionListener(new LoginAction());
-        loginButton.addActionListener(new LoginAction());
-        cancelButton.addActionListener(new ActionListener() {
+
+        ActionListener loginAction = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                disableButtons();
+                new Thread(new Progress()).start();
+            }
+        };
+
+        registerButton.addActionListener(loginAction);
+        loginButton.addActionListener(loginAction);
+
+        clearButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 loginText.setText("");
                 passwordText.setText("");
             }
-        });*/
+        });
+    }
 
+    private void disableButtons() {
+        loginButton.setEnabled(false);
+        registerButton.setEnabled(false);
+    }
+    
+    private void enableButtons() {
+        loginButton.setEnabled(true);
+        registerButton.setEnabled(true);
 
     }
 
+    class Progress implements Runnable {
+        public void run() {
+            for (int i = 0; i <= 100; i++) {
+                try {
+                    pBar.setValue(i);
+                    Thread.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            enableButtons();
+            JOptionPane.showMessageDialog(LoginWindow.this, "Hello!");
+            //LoginWindow.this.setVisible(false);
+            /*editorWindow.setLocation(400, 400);
+            editorWindow.setTitle("Hello, " + loginText.getText());
+            editorWindow.setVisible(true);*/
+        }
+    }
 }
