@@ -9,49 +9,64 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class EditorWindow extends JFrame {
-    private JTabbedPane workArea;
+    private JTabbedPane editorBox;
+    private Button close;
+    AbstractAction openFileAction;
+    AbstractAction closeFileAction;
 
     private class OpenFileAction extends AbstractAction {
         OpenFileAction() {
-            putValue(Action.NAME, "Open file");
-            putValue(Action.SHORT_DESCRIPTION, "Open file in editor");
+            putValue(Action.NAME, "Open");
+            putValue(Action.SHORT_DESCRIPTION, "Open file");
         }
 
         public void actionPerformed(ActionEvent event) {
             JFileChooser chooser = new JFileChooser();
             chooser.showOpenDialog(EditorWindow.this);
             File chosen = chooser.getSelectedFile();
+            if (chosen == null)
+                return;
 
 
-            String text = new String();
+            String text = "";
             String line;
             try (BufferedReader reader = new BufferedReader(new FileReader(chosen))) {
                 while ((line = reader.readLine()) != null) {
-                    text += line;
+                    text += line + "\n";
                 }
+
             } catch (IOException e) {
+                JOptionPane.showMessageDialog(EditorWindow.this, "Read error.");
             }
 
-            TextField textField = new TextField(text);
-            workArea.addTab(chosen.getName(), textField);
+            JTextArea textField = new JTextArea(text);
+            editorBox.addTab(chosen.getName(), textField);
+
+            closeFileAction.setEnabled(true);
+            close.setEnabled(true);
         }
     }
 
     private class CloseFileAction extends AbstractAction {
         CloseFileAction() {
             putValue(Action.NAME, "Close");
-            putValue(Action.SHORT_DESCRIPTION, "Close file in editor");
+            putValue(Action.SHORT_DESCRIPTION, "Close file");
         }
 
         public void actionPerformed(ActionEvent event) {
-            workArea.remove(workArea.getSelectedIndex());
+            editorBox.remove(editorBox.getSelectedIndex());
+            if (editorBox.getTabCount() == 0) {
+                closeFileAction.setEnabled(false);
+                close.setEnabled(false);
+            }
+
         }
     }
 
     private class ExitAction extends AbstractAction {
         ExitAction() {
             putValue(Action.NAME, "Exit");
-            putValue(Action.SHORT_DESCRIPTION, "Exits the application");
+            putValue(Action.SHORT_DESCRIPTION, "Exit");
         }
 
         public void actionPerformed(ActionEvent event) {
@@ -59,43 +74,54 @@ public class EditorWindow extends JFrame {
         }
     }
 
+    public void setUserName(String name) {
+        this.setTitle("Hello " + name);
+    }
+    
     public EditorWindow() {
-        super("Hello, user");
+        super("Hello");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(800, 600);
         setResizable(true);
 
+        openFileAction = new OpenFileAction();
+        closeFileAction = new CloseFileAction();
+
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
-        fileMenu.add(new OpenFileAction());
-        fileMenu.add(new CloseFileAction());
+        fileMenu.add(openFileAction);
+        fileMenu.add(closeFileAction);
         fileMenu.addSeparator();
         fileMenu.add(new ExitAction());
         menuBar.add(fileMenu);
         setJMenuBar(menuBar);
 
+        Dimension btnDimension = new Dimension(100, 50);
+
         Box leftPanel = Box.createVerticalBox();
         leftPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-        Button open = new Button("Open");
-        open.setMaximumSize(new Dimension(100, 50));
-        open.addActionListener(new OpenFileAction());
+        Button open = new Button((String)openFileAction.getValue(Action.NAME));
+        open.setMaximumSize(btnDimension);
+        open.addActionListener(openFileAction);
 
-        Button close = new Button("Close");
-        close.addActionListener(new CloseFileAction());
-        close.setMaximumSize(new Dimension(100, 50));
+        close = new Button((String)closeFileAction.getValue(Action.NAME));
+        close.addActionListener(closeFileAction);
+        close.setMaximumSize(btnDimension);
+        closeFileAction.setEnabled(false);
+        close.setEnabled(false);
 
         Button about = new Button("About");
         about.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,
-                        "Hello, information about developers.");
+                        "About.");
             }
         });
-        about.setMaximumSize(new Dimension(100, 50));
+        about.setMaximumSize(btnDimension);
 
         Button exit = new Button("Exit");
         exit.addActionListener(new ExitAction());
-        exit.setMaximumSize(new Dimension(100, 50));
+        exit.setMaximumSize(btnDimension);
 
         leftPanel.add(open);
         leftPanel.add(close);
@@ -104,8 +130,8 @@ public class EditorWindow extends JFrame {
         leftPanel.add(exit);
         getContentPane().add(leftPanel, BorderLayout.WEST);
 
-        workArea = new JTabbedPane();
-        workArea.setBorder(new EmptyBorder(5, 5, 5, 5));
-        getContentPane().add(workArea);
+        editorBox = new JTabbedPane();
+        editorBox.setBorder(new EmptyBorder(4, 4, 4, 4));
+        getContentPane().add(editorBox);
     }
 }

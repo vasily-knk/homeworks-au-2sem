@@ -1,0 +1,62 @@
+{-# LANGUAGE FlexibleInstances #-}
+
+import qualified Data.Map as M
+
+-- К функциям из Data.Map обращайтесь с префиксом M.
+-- Т.е. вместо lookup используйте M.lookup
+
+-- f достает из мапы значения по ключам "x", "y" и "z".
+-- Если хотя бы одного из них нет, возвращает Nothing.
+-- Иначе возвращает сумму значений.
+-- Используйте do-нотацию.
+
+class Monad m => MonadLookup m where
+    lookupM :: String -> M.Map String Int -> m Int
+    
+fff :: MonadLookup m => M.Map String Int -> m Int
+fff map = do
+    x <- lookupM "x" map
+    y <- lookupM "y" map
+    z <- lookupM "z" map
+    return (x + y + z)
+    
+
+    
+instance MonadLookup Maybe where
+    lookupM = M.lookup    
+
+f :: M.Map String Int -> Maybe Int
+f = fff
+    
+
+lookup' :: (Show a, Ord a) => a -> M.Map a b -> Either String b
+lookup' a m = maybe (Left $ show a ++ " not found") Right (M.lookup a m)
+
+
+instance MonadLookup (Either String) where
+    lookupM = lookup'    
+
+-- Тоже самое, что и f, только вместо M.lookup используйте lookup'
+g :: M.Map String Int -> Either String Int
+g = fff
+
+-- Тесты
+tests = map M.fromList
+    [ [("a",1),("y",2),("z",3)]
+    , [("x",1),("y",2),("a",3)]
+    , [("x",1),("y",2),("z",3)]
+    ]
+
+main = do
+    mapM_ (print . f) tests
+    mapM_ (print' . g) tests
+    where print' (Left s) = putStrLn s
+          print' (Right a) = print a
+
+-- Вывод:
+-- Nothing
+-- Nothing
+-- Just 6
+-- "x" not found
+-- "z" not found
+-- 6

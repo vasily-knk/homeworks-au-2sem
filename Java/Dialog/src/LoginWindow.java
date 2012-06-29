@@ -12,11 +12,16 @@ public class LoginWindow extends JFrame {
     private JButton loginButton;
     private JButton registerButton;
     private JButton clearButton;
+    
+    private EditorWindow editorWindow;
 
 
 
-    public LoginWindow() {
+    public LoginWindow(EditorWindow editorWindow) {
         super("Login");
+        
+        this.editorWindow = editorWindow;
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -88,23 +93,33 @@ public class LoginWindow extends JFrame {
 
     class Progress implements Runnable {
         public void run() {
+            BarUpdater updater = new BarUpdater();
             for (int i = 0; i <= 100; i++) {
                 try {
-                    pBar.setValue(i);
+                    updater.setValue(i);
+                    SwingUtilities.invokeLater(updater);
                     Thread.sleep(5);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    return;
                 }
             }
             enableButtons();
-            JOptionPane.showMessageDialog(LoginWindow.this, "Hello!");
 
-            JFrame editorWindow = new EditorWindow();
+            editorWindow.setUserName(loginText.getText());
             editorWindow.setVisible(true);
-            //LoginWindow.this.setVisible(false);
-            /*editorWindow.setLocation(400, 400);
-            editorWindow.setTitle("Hello, " + loginText.getText());
-            editorWindow.setVisible(true);*/
+        }
+    }
+    
+    class BarUpdater implements Runnable {
+        private int value = 0;
+
+        public void setValue(int value) {
+            this.value = value;
+        }
+
+        @Override
+        public void run() {
+            pBar.setValue(value);
         }
     }
 }
