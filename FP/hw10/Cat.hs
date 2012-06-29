@@ -13,8 +13,11 @@ catFile f = do
 main :: IO()
 main = do 
     args <- getArgs
-    
-    (E.catch (mapM_ catFile args) (\e -> do
+
+    if (args == []) then 
+        interact id
+    else
+        (E.catch (mapM_ catFile args) (\e -> do
                         let err = show (e :: IOException)
-                        hPutStr stderr (err)
-                        return ()))    
+                        hPutStrLn stderr ("Error: " ++ err)))
+                        
