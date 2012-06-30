@@ -10,8 +10,7 @@ import Control.Monad.Writer
        
 for :: Monad m => Integer -> Integer -> (Integer -> m ()) -> m ()
 for x y f = mapM_ f [x..(y-1)]
-
-        
+       
     
 -- 3.
 -- a) Напишите монаду Counter. Она должна поддерживать операции
@@ -30,16 +29,11 @@ runCounter = helper . runWriter where
 
 tick :: Counter ()
 tick = counter ((), 1)
-
-fac :: Int -> Counter Int
-fac 0 = return 1    
-fac n = do
-  tick
-  r <- fac (n - 1)
-  return (n * r)
     
 -- b) Напишите функции
 -- filter' :: (a -> Bool) -> [a] -> Counter [a]
+-- append :: [a] -> [a] -> Counter [a]
+-- qsort :: Ord a => [a] -> Counter [a]
 
 filter' :: (a -> Bool) -> [a] -> Counter[a]
 filter' _ [] = return []
@@ -50,7 +44,6 @@ filter' pred (x:xs)
         return (x : xs)
     | otherwise = filter' pred xs
 
--- append :: [a] -> [a] -> Counter [a]
 append :: [a] -> [a] -> Counter [a]
 append [] ys = return ys
 append (x:xs) ys = do
@@ -58,7 +51,16 @@ append (x:xs) ys = do
     xs <- append xs ys
     return (x : xs)
 
+qsort :: Ord a => [a] -> Counter [a]
+qsort [] = return []
+qsort (p:xs) = do
+    tick
+    lesser  <- filter' (< p) xs
+    lesser  <- qsort lesser
+    greater <- filter' (>= p) xs
+    greater <- qsort greater
+    lesser `append` (p : greater)
+    
 
--- qsort :: Ord a => [a] -> Counter [a]
 -- являющиеся аналогами функций filter, (++), sort, но считающие количество шагов.
 -- Убедитесь, что список [8,4,12,2,6,10,14,1,3,5,7,9,11,13,15] сортируется быстрее, чем [1..15]
