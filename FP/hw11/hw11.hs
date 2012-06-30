@@ -18,17 +18,19 @@ for x y f = mapM_ f [x..(y-1)]
 -- runCounter :: Counter a -> (a, Int) -- возвращает результат и количество тиков.
 
 
-type Counter a = Writer (Sum Int) a 
+newtype Counter a = Counter { runCounter :: (a, Int) }
 
 counter :: (a, Int) -> Counter a
-counter (a, i) = writer (a, Sum i)
-
-runCounter :: Counter a -> (a, Int)
-runCounter = helper . runWriter where
-    helper (a, Sum i) = (a, i)
+counter = Counter
 
 tick :: Counter ()
 tick = counter ((), 1)
+
+instance Monad Counter where
+    return x = Counter (x, 0)
+    (Counter (x, i)) >>= f = Counter $ helper $ f x where
+        helper (Counter (y, j)) = (y, j + i)
+
     
 -- b) Напишите функции
 -- filter' :: (a -> Bool) -> [a] -> Counter [a]
