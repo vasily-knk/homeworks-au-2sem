@@ -21,9 +21,14 @@ instance Monad m => Monad (MaybeT m) where
     fail _ = MaybeT $ return Nothing
 
 instance Monad m => MonadMaybe (MaybeT m) where
-    abort = undefined
-    recover = undefined
-
+    abort = MaybeT $ return Nothing
+    
+    recover a b = MaybeT $ do
+        x <- runMaybeT a
+        case x of 
+            Nothing -> runMaybeT b
+            Just _  -> return x
+        
 
 instance MonadTrans MaybeT where
     lift = MaybeT . liftM Just
@@ -47,11 +52,15 @@ instance Monad m => Monad (EitherT e m) where
         helper (Right r) = runEitherT $ f r
 
 instance Monad m => MonadEither e (EitherT e m) where
-    throw = undefined
-    catch = undefined
+    throw = EitherT . return . Left 
+    catch a f = EitherT $ do
+        x <- runEitherT a
+        case x of 
+            Left e  -> runEitherT $ f e
+            Right _ -> return x
 
 instance MonadTrans (EitherT e) where
-    lift = undefined --EitherT . liftM . Right
+    lift = EitherT . liftM Right
 
 instance MonadIO m => MonadIO (EitherT e m) where
-    liftIO = undefined
+    liftIO = lift . liftIO
