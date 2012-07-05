@@ -6,11 +6,9 @@ namespace my_graph
 	struct path_vertex
 	{
 		inline path_vertex (edge_weight d, vertex_id parent) : d(d), parent(parent) {}
-		//inline path_vertex (edge_weight d, edge_id inc, vertex_id parent) : d(d),/* inc(inc),*/ parent(parent) {}
 		inline path_vertex () {};
 
 		edge_weight d;
-		//edge_id inc;       // Will probably be removed (KNK)
 		vertex_id parent;  // Redundant unless inc is removed (KNK)
 	};
 
@@ -27,15 +25,16 @@ namespace my_graph
 		edge_weight d;
 	};
 
+
 	typedef unordered_map<vertex_id, path_vertex> path_map;
 
 	class reach_dijkstra
 	{
 	public:
 
-		typedef bool (*vert_checker) (vertex_id);
+		typedef std::unary_function<vertex_id, bool> vert_checker;
 
-		inline reach_dijkstra(const graph &ref_graph, vertex_id start, path_map &ref_out, const vert_checker& checker = NULL);
+		inline reach_dijkstra(const graph &ref_graph, vertex_id start, path_map &ref_out, edge_weight shaft_dist);
 
 		inline bool check_vertex(vertex_id id) const;
 		inline bool done();
@@ -43,6 +42,8 @@ namespace my_graph
 		inline vertex_id get_next();
 		inline const path_map &get_border() const;
 
+
+		inline size_t get_n_shafts() const {return n_shafts_;}
 	private:
 		inline void discard_dublicates();    
 		inline edge_weight get_weight(const edge &e) {return e.weight;}
@@ -53,15 +54,18 @@ namespace my_graph
 		path_map border_;
 		priority_queue<heap_vertex> q_;
 		vert_checker vert_checker_;
+		edge_weight shaft_dist_;
+		size_t n_shafts_;
 	public:
 		size_t max_heap_size_;
 	};
 
-	reach_dijkstra::reach_dijkstra(const graph &ref_graph, vertex_id start, path_map &ref_out, const vert_checker& checker)
+	reach_dijkstra::reach_dijkstra(const graph &ref_graph, vertex_id start, path_map &ref_out, edge_weight shaft_dist)
 		: pgraph_(&ref_graph)
 		, pout_(&ref_out)
 		, max_heap_size_(0)
-		, vert_checker_(checker)
+		, shaft_dist_(shaft_dist)
+		, n_shafts_(0)
 	{
 		q_.push(heap_vertex(start, 0));
 		border_[start] = path_vertex(0, start);
@@ -86,9 +90,8 @@ namespace my_graph
 		const path_vertex &pv = (*pout_)[hv.id] = border_.at(hv.id);
 		border_.erase(hv.id);
 
-		bool check_result = check_vertex(hv.id);
 
-		if (check_result)
+		if (pv.d < shaft_dist_)
 		{
 			const vertex &v = pgraph_->get_vertex(hv.id);
 
@@ -99,11 +102,51 @@ namespace my_graph
 				const edge_id &eid = (*it).e;
 				const edge &e = pgraph_->get_edge(eid);
 
-				if (pout_->count (adj_vid) > 0)
-					continue;
+				const edge_weight ew = get_weight(e);
+
+
+				if (pv.d + ew >= shaft_dist_)
+				{
+					bool add_shaft = false;
+
+					if (pout_->count (adj_vid) == 0)
+					{
+						cout << "shaft candidate at " << hv.id << " - " << adj_vid << endl;
+						add_shaft = true;
+					}
+					else 
+					{
+						const path_vertex &pv_other = pout_->at(adj_vid);
+						
+						if (pv_other.d + ew < shaft_dist_)
+						{
+							cout << "nothing to fear at " << hv.id << " - " << adj_vid << endl;
+							add_shaft = true;
+						}
+						else
+						{
+							const edge_weight leftover1 = shaft_dist_ - pv.d;
+							const edge_weight leftover2 = shaft_dist_ - pv_other.d;
+
+							if (leftover1 + leftover2 < ew)
+							{
+								cout << "two shafts at " << hv.id << " - " << adj_vid << endl;
+								add_shaft = true;
+							}
+						}
+					}
+
+					if (add_shaft)
+						++n_shafts_;
+				}
 
 				const path_vertex pv2 (pv.d + get_weight(e), hv.id);
 				const heap_vertex hv2 (adj_vid, pv2.d); 
+
+				if (pout_->count (adj_vid) != 0)
+					continue;
+
+
 
 				if (border_.count(adj_vid) == 0 || border_.at(adj_vid).d > pv2.d)
 				{
@@ -112,14 +155,15 @@ namespace my_graph
 				}
 			}
 		}
+
+
+
 		return hv.id;
 	}
 
 	bool reach_dijkstra::check_vertex(vertex_id id) const
 	{
-		if (vert_checker_ == NULL)
-			return true;
-		return vert_checker_(id);
+		return pout_->at(id).d < shaft_dist_;
 	}
 
 	my_graph::vertex_id reach_dijkstra::get_next()
