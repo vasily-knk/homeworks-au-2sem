@@ -90,6 +90,11 @@ namespace my_graph
 		const path_vertex &pv = (*pout_)[hv.id] = border_.at(hv.id);
 		border_.erase(hv.id);
 
+		if (pv.d == shaft_dist_) 
+		{
+			cout << "exact shaft at " << hv.id << endl;
+			++n_shafts_;
+		}
 
 		if (pv.d < shaft_dist_)
 		{
@@ -105,7 +110,7 @@ namespace my_graph
 				const edge_weight ew = get_weight(e);
 
 
-				if (pv.d + ew >= shaft_dist_)
+				if (pv.d + ew > shaft_dist_)
 				{
 					bool add_shaft = false;
 
