@@ -93,7 +93,7 @@ namespace my_graph
 
 		if (pv.d == shaft_dist_) 
 		{
-			//cout << "exact shaft at " << hv.id << endl;
+			cout << "exact shaft at " << hv.id << endl;
 			++n_shafts_;
 		}
 
@@ -113,23 +113,16 @@ namespace my_graph
 
 				if (pv.d + ew > shaft_dist_)
 				{
-					bool add_shaft = false;
-
 					if (pout_->count (adj_vid) == 0)
 					{
-						//cout << "shaft candidate at " << hv.id << " - " << adj_vid << endl;
-						add_shaft = true;
+						cout << "shaft candidate at " << hv.id << " - " << adj_vid << endl;
+						++n_shafts_;
 					}
 					else 
 					{
 						const path_vertex &pv_other = pout_->at(adj_vid);
 						
-						if (pv_other.d + ew < shaft_dist_)
-						{
-							//cout << "nothing to fear at " << hv.id << " - " << adj_vid << endl;
-							add_shaft = true;
-						}
-						if (pv_other.d + ew < shaft_dist_)
+						if (pv_other.d + ew >= shaft_dist_)
 						{
 							const edge_weight leftover1 = shaft_dist_ - pv.d;
 							const edge_weight leftover2 = shaft_dist_ - pv_other.d;
@@ -142,8 +135,6 @@ namespace my_graph
 						}
 					}
 
-					if (add_shaft)
-						++n_shafts_;
 				}
 
 				const path_vertex pv2 (pv.d + get_weight(e), hv.id);
