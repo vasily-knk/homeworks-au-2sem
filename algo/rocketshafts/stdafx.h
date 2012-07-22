@@ -3,7 +3,8 @@
 // are changed infrequently
 //
 
-#pragma once
+#if !defined (STDAFX_H)
+#define STDAFX_H
 
 #include <iostream>
 using std::cout;
@@ -13,10 +14,13 @@ using std::endl;
 #include <vector>
 using std::vector;
 
-#include <unordered_map>
-using std::unordered_map;
+#include <map>
+using std::map;
 
 #include <queue>
 using std::priority_queue;
 
 #include <functional>
+#include <cassert>
+
+#endif // STDAFX_H

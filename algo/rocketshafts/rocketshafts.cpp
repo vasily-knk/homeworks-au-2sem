@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "graph.h"
+#include "dumb_map.h"
 #include "dijkstra.h"
 
 using namespace my_graph;

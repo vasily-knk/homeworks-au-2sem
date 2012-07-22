@@ -1,4 +1,5 @@
-#pragma once
+#if !defined (GRAPH_H)
+#define GRAPH_H
 
 namespace my_graph
 {
@@ -179,3 +180,5 @@ namespace my_graph
     }
 
 }
+
+#endif // GRAPH_H

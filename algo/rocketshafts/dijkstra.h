@@ -1,4 +1,5 @@
-#pragma once
+#if !defined (DIJKSTRA_H)
+#define DIJKSTRA_H
 
 namespace my_graph
 {
@@ -26,7 +27,7 @@ namespace my_graph
 	};
 
 
-	typedef unordered_map<vertex_id, path_vertex> path_map;
+	typedef dumb_map<path_vertex> path_map;
 
 	class reach_dijkstra
 	{
@@ -188,3 +189,5 @@ namespace my_graph
 		return border_;
 	}
 }
+
+#endif // DIJKSTRA_H
