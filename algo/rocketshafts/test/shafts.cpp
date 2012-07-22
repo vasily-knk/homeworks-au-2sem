@@ -291,7 +291,7 @@ namespace my_graph
 
 		if (pv.d == shaft_dist_) 
 		{
-			cout << "exact shaft at " << hv.id << endl;
+//			cout << "exact shaft at " << hv.id << endl;
 			++n_shafts_;
 		}
 
@@ -315,7 +315,7 @@ namespace my_graph
 
 					if (pout_->count (adj_vid) == 0)
 					{
-						cout << "shaft candidate at " << hv.id << " - " << adj_vid << endl;
+//						cout << "shaft candidate at " << hv.id << " - " << adj_vid << endl;
 						add_shaft = true;
 					}
 					else 
@@ -324,17 +324,18 @@ namespace my_graph
 						
 						if (pv_other.d + ew < shaft_dist_)
 						{
-							cout << "nothing to fear at " << hv.id << " - " << adj_vid << endl;
+//							cout << "nothing to fear at " << hv.id << " - " << adj_vid << endl;
 							add_shaft = true;
 						}
-						else
+
+						if (pv_other.d + ew  >shaft_dist_)
 						{
 							const edge_weight leftover1 = shaft_dist_ - pv.d;
 							const edge_weight leftover2 = shaft_dist_ - pv_other.d;
 
 							if (leftover1 + leftover2 < ew)
 							{
-								cout << "two shafts at " << hv.id << " - " << adj_vid << endl;
+//								cout << "two shafts at " << hv.id << " - " << adj_vid << endl;
 								add_shaft = true;
 							}
 						}
