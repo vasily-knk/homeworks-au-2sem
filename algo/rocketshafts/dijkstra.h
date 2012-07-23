@@ -93,7 +93,7 @@ namespace my_graph
 
 		if (pv.d == shaft_dist_) 
 		{
-			cout << "exact shaft at " << hv.id << endl;
+			//cout << "exact shaft at " << hv.id << endl;
 			++n_shafts_;
 		}
 
@@ -107,7 +107,7 @@ namespace my_graph
 				const vertex &adj_v = pgraph_->get_vertex(adj_vid);
 				const edge_id &eid = (*it).e;
 				const edge &e = pgraph_->get_edge(eid);
-
+                
 				const edge_weight ew = get_weight(e);
 
 
@@ -115,7 +115,7 @@ namespace my_graph
 				{
 					if (pout_->count (adj_vid) == 0)
 					{
-						cout << "shaft candidate at " << hv.id << " - " << adj_vid << endl;
+						//cout << "shaft candidate at " << hv.id << " - " << adj_vid << endl;
 						++n_shafts_;
 					}
 					else 
@@ -128,10 +128,9 @@ namespace my_graph
 							const edge_weight leftover2 = shaft_dist_ - pv_other.d;
 
 							if (leftover1 + leftover2 < ew)
-							{
-								//cout << "two shafts at " << hv.id << " - " << adj_vid << endl;
-								add_shaft = true;	
-							}
+                                ++n_shafts_;
+                            else if (leftover1 + leftover2 > ew)
+                                --n_shafts_;
 						}
 					}
 
