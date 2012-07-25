@@ -50,12 +50,11 @@ namespace my_graph
 		inline edge_weight get_weight(const edge &e) {return e.weight;}
 
 	private:
-		const graph *pgraph_;
-		path_map *pout_;
+		graph const * const pgraph_;
+		path_map * const pout_;
 		path_map border_;
 		priority_queue<heap_vertex> q_;
-		vert_checker vert_checker_;
-		edge_weight shaft_dist_;
+		const edge_weight shaft_dist_;
 		size_t n_shafts_;
 	public:
 		size_t max_heap_size_;
@@ -85,20 +84,20 @@ namespace my_graph
 
 		discard_dublicates();
 
-		heap_vertex hv = q_.top();  
+		const heap_vertex hv = q_.top();  
 		q_.pop();
 
 		const path_vertex &pv = (*pout_)[hv.id] = border_.at(hv.id);
 		border_.erase(hv.id);
-
+			
 		if (pv.d == shaft_dist_) 
 		{
 			//cout << "exact shaft at " << hv.id << endl;
 			++n_shafts_;
 		}
 
-		if (pv.d < shaft_dist_)
-		{
+		//if (pv.d < shaft_dist_)
+		//{
 			const vertex &v = pgraph_->get_vertex(hv.id);
 
 			for (vertex::adj_iterator it = v.out_begin(); it != v.out_end(); ++it)
@@ -111,7 +110,7 @@ namespace my_graph
 				const edge_weight ew = get_weight(e);
 
 
-				if (pv.d + ew > shaft_dist_)
+				/*if (pv.d + ew > shaft_dist_)
 				{
 					if (pout_->count (adj_vid) == 0)
 					{
@@ -134,7 +133,7 @@ namespace my_graph
 						}
 					}
 
-				}
+				}*/
 
 				const path_vertex pv2 (pv.d + get_weight(e), hv.id);
 				const heap_vertex hv2 (adj_vid, pv2.d); 
@@ -149,17 +148,12 @@ namespace my_graph
 					q_.push(hv2);
 					border_[adj_vid] = pv2;
 				}
-			}
+			//}
 		}
 
 
 
 		return hv.id;
-	}
-
-	bool reach_dijkstra::check_vertex(vertex_id id) const
-	{
-		return pout_->at(id).d < shaft_dist_;
 	}
 
 	my_graph::vertex_id reach_dijkstra::get_next()
