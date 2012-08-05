@@ -22,6 +22,6 @@ using std::priority_queue;
 
 #include <functional>
 #include <cassert>
-
+#include <numeric>
 
 #endif // STDAFX_H

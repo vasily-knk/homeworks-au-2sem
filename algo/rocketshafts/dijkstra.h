@@ -35,7 +35,7 @@ namespace my_graph
 
 		typedef std::unary_function<vertex_id, bool> vert_checker;
 
-		inline reach_dijkstra(const graph &ref_graph, vertex_id start, path_map &ref_out, edge_weight shaft_dist);
+		inline reach_dijkstra(const graph &ref_graph, vertex_id start, path_map &ref_out, vector<int> &out_counters, edge_weight shaft_dist);
 
 		inline bool check_vertex(vertex_id id) const;
 		inline bool done();
@@ -56,18 +56,22 @@ namespace my_graph
 		priority_queue<heap_vertex> q_;
 		const edge_weight shaft_dist_;
 		size_t n_shafts_;
+
+        vector<int> *counters_;
 	public:
 		size_t max_heap_size_;
 	};
 
-	reach_dijkstra::reach_dijkstra(const graph &ref_graph, vertex_id start, path_map &ref_out, edge_weight shaft_dist)
+	reach_dijkstra::reach_dijkstra(const graph &ref_graph, vertex_id start, path_map &ref_out, vector<int> &out_counters, edge_weight shaft_dist)
 		: pgraph_(&ref_graph)
 		, pout_(&ref_out)
+        , counters_(&out_counters)
 		, max_heap_size_(0)
 		, shaft_dist_(shaft_dist)
 		, n_shafts_(0)
 	{
-		q_.push(heap_vertex(start, 0));
+		counters_->resize(pgraph_->e_count(), 0);
+        q_.push(heap_vertex(start, 0));
 		border_[start] = path_vertex(0, start);
 	}
 
@@ -96,8 +100,8 @@ namespace my_graph
 			++n_shafts_;
 		}
 
-		//if (pv.d < shaft_dist_)
-		//{
+		if (pv.d < shaft_dist_)
+		{
 			const vertex &v = pgraph_->get_vertex(hv.id);
 
 			for (vertex::adj_iterator it = v.out_begin(); it != v.out_end(); ++it)
@@ -110,30 +114,38 @@ namespace my_graph
 				const edge_weight ew = get_weight(e);
 
 
-				/*if (pv.d + ew > shaft_dist_)
+				if (pv.d < shaft_dist_ && pv.d + ew > shaft_dist_)
 				{
 					if (pout_->count (adj_vid) == 0)
 					{
 						//cout << "shaft candidate at " << hv.id << " - " << adj_vid << endl;
-						++n_shafts_;
+						++(*counters_)[eid];
 					}
 					else 
 					{
 						const path_vertex &pv_other = pout_->at(adj_vid);
 						
-						if (pv_other.d + ew >= shaft_dist_)
+						if (pv_other.d + ew > shaft_dist_)
 						{
 							const edge_weight leftover1 = shaft_dist_ - pv.d;
 							const edge_weight leftover2 = shaft_dist_ - pv_other.d;
 
 							if (leftover1 + leftover2 < ew)
-                                ++n_shafts_;
+                                ++(*counters_)[eid];
                             else if (leftover1 + leftover2 > ew)
-                                --n_shafts_;
+                            {
+                                --(*counters_)[eid];
+                                if ((*counters_)[eid] < 0)
+                                {
+                                    cout << "UBER ACHTUNG: " << leftover1 << ", " << leftover2 << ": " << ew
+                                         << " at " << hv.id + 1 << ", " << adj_vid + 1 << endl;
+                                }
+                                         
+                            }
 						}
 					}
 
-				}*/
+				}
 
 				const path_vertex pv2 (pv.d + get_weight(e), hv.id);
 				const heap_vertex hv2 (adj_vid, pv2.d); 
@@ -148,7 +160,7 @@ namespace my_graph
 					q_.push(hv2);
 					border_[adj_vid] = pv2;
 				}
-			//}
+			}
 		}
 
 
