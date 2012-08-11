@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9F754515-F16E-4B29-8066-C0E907F18110}</ProjectGuid>
+    <ProjectGuid>{907043C8-BA9E-4A21-AADF-A86F73623E8A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>shortener</RootNamespace>
+    <RootNamespace>message</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -83,15 +83,16 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="shortener.cpp" />
+    <ClCompile Include="message.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="input.txt" />
-    <None Include="output.txt" />
+    <None Include="1.txt" />
+    <None Include="2.txt" />
+    <None Include="3.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

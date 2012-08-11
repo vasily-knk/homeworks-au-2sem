@@ -9,6 +9,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cthulhu", "cthulhu\cthulhu.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shortener", "shortener\shortener.vcxproj", "{9F754515-F16E-4B29-8066-C0E907F18110}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "message", "message\message.vcxproj", "{907043C8-BA9E-4A21-AADF-A86F73623E8A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "suspects", "suspects\suspects.vcxproj", "{27F3E0C5-B33B-4C29-88CA-F27E2070B5E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -31,6 +35,14 @@ Global
 		{9F754515-F16E-4B29-8066-C0E907F18110}.Debug|Win32.Build.0 = Debug|Win32
 		{9F754515-F16E-4B29-8066-C0E907F18110}.Release|Win32.ActiveCfg = Release|Win32
 		{9F754515-F16E-4B29-8066-C0E907F18110}.Release|Win32.Build.0 = Release|Win32
+		{907043C8-BA9E-4A21-AADF-A86F73623E8A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{907043C8-BA9E-4A21-AADF-A86F73623E8A}.Debug|Win32.Build.0 = Debug|Win32
+		{907043C8-BA9E-4A21-AADF-A86F73623E8A}.Release|Win32.ActiveCfg = Release|Win32
+		{907043C8-BA9E-4A21-AADF-A86F73623E8A}.Release|Win32.Build.0 = Release|Win32
+		{27F3E0C5-B33B-4C29-88CA-F27E2070B5E8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{27F3E0C5-B33B-4C29-88CA-F27E2070B5E8}.Debug|Win32.Build.0 = Debug|Win32
+		{27F3E0C5-B33B-4C29-88CA-F27E2070B5E8}.Release|Win32.ActiveCfg = Release|Win32
+		{27F3E0C5-B33B-4C29-88CA-F27E2070B5E8}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
