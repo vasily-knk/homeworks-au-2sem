@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rocketshafts", "rocketshaft
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cthulhu", "cthulhu\cthulhu.vcxproj", "{5CAB9AAF-F20A-4042-81A2-70425DD432E2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shortener", "shortener\shortener.vcxproj", "{9F754515-F16E-4B29-8066-C0E907F18110}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -25,6 +27,10 @@ Global
 		{5CAB9AAF-F20A-4042-81A2-70425DD432E2}.Debug|Win32.Build.0 = Debug|Win32
 		{5CAB9AAF-F20A-4042-81A2-70425DD432E2}.Release|Win32.ActiveCfg = Release|Win32
 		{5CAB9AAF-F20A-4042-81A2-70425DD432E2}.Release|Win32.Build.0 = Release|Win32
+		{9F754515-F16E-4B29-8066-C0E907F18110}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9F754515-F16E-4B29-8066-C0E907F18110}.Debug|Win32.Build.0 = Debug|Win32
+		{9F754515-F16E-4B29-8066-C0E907F18110}.Release|Win32.ActiveCfg = Release|Win32
+		{9F754515-F16E-4B29-8066-C0E907F18110}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
