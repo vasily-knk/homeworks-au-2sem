@@ -89,6 +89,11 @@
     </ClCompile>
     <ClCompile Include="suspects.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="1.txt" />
+    <None Include="2.txt" />
+    <None Include="3.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
