@@ -37,15 +37,15 @@ int main()
         }
     }
     
-    for (size_t i = 0; i < num_suspects; ++i)
+    /*for (size_t i = 0; i < num_suspects; ++i)
     {
         std::sort(positive_for_me[i].begin(), positive_for_me[i].end());
         std::sort(negative_for_me[i].begin(), negative_for_me[i].end());
-    }
+    }*/
 
-    vector<size_t> truths(num_suspects, 0);
+    vector<int> truths(num_suspects, 0);
     //vector<size_t> lies(num_suspects, 0);
-    size_t num_cases = 0;
+    int num_cases = 0;
 
     for (size_t i = 0; i < num_suspects; ++i)
     {
@@ -66,13 +66,15 @@ int main()
         for (vector<size_t>::const_iterator it = positive_for_me[i].begin(); it != positive_for_me[i].end(); ++it)
             ++truths[*it];
 
-        for (vector<size_t>::const_iterator it = negative.begin(); it != negative.end(); ++it)
-        {
-            if (!std::binary_search(negative_for_me[i].begin(), negative_for_me[i].end(), *it))
-                ++truths[*it];
-        }
+        for (vector<size_t>::const_iterator it = negative_for_me[i].begin(); it != negative_for_me[i].end(); ++it)
+            --truths[*it];
+
         
         ++num_cases;
+    }
+    for (vector<size_t>::const_iterator it = negative.begin(); it != negative.end(); ++it)
+    {
+        truths[*it] += num_cases;
     }
 
 
