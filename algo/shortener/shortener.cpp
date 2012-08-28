@@ -41,7 +41,6 @@ private:
     const static size_t RADIX = 27;
 
 public:
-
     static size_t hash_string(const string &str)
     {
         size_t val = 0;
@@ -81,7 +80,7 @@ public:
         return false;
     }
 
-    bool process(const vector<string> strings, vector<string> *out)
+    bool process(const vector<string> &strings, vector<string> *out)
     {
         strings_ = strings;
         substrings_.resize(strings.size());
@@ -134,14 +133,6 @@ void read_data(const char *filename, vector<string> *out)
     std::copy (begin, end, out->begin());
 }
 
-int amain()
-{
-    const string str = "aadd";
-    const size_t hash = substrings_matcher::hash_string(str);
-    cout << substrings_matcher::unhash_string(hash) << endl;
-    return 0;
-}
-
 int main()
 {
     vector<string> strings;
@@ -162,7 +153,6 @@ int main()
         s << "-1" << endl;
     }
     
-
     return 0;
 }
 

@@ -6,7 +6,7 @@ namespace my_graph
 
 	struct path_vertex
 	{
-		inline path_vertex (edge_weight d, vertex_id parent) : d(d), parent(parent) {}
+		inline path_vertex (const edge_weight d, const vertex_id parent) : d(d), parent(parent) {}
 		inline path_vertex () {};
 
 		edge_weight d;
@@ -16,7 +16,7 @@ namespace my_graph
 	struct heap_vertex 
 	{
 		inline heap_vertex () {}
-		inline heap_vertex (vertex_id id, edge_weight d) : id(id), d(d) {}
+		inline heap_vertex (const vertex_id id, const edge_weight d) : id(id), d(d) {}
 		inline bool operator< (const heap_vertex& b) const
 		{
 			return (d > b.d);
@@ -42,7 +42,6 @@ namespace my_graph
 		inline vertex_id iterate();
 		inline vertex_id get_next();
 		inline const path_map &get_border() const;
-
 
 		inline size_t get_n_shafts() const {return n_shafts_;}
 	private:
